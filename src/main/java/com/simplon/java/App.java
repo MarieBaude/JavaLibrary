@@ -39,7 +39,7 @@ public class App {
 		final String SEPARATOR = "\n";
 		
 		try {
-			file = new FileWriter("Books.csv");
+			file = new FileWriter("Books.csv", true);
 	          file.append(newBook.getTitle());
 	          file.append(DELIMITER);
 	          file.append(newBook.getAuthor());
