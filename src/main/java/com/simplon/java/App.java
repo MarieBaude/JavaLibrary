@@ -65,13 +65,17 @@ public class App {
 		Scanner sc6 = new Scanner(new File("Books.csv")); 
 		
 		while (sc6.hasNext())  {  
-			System.out.print(sc6.next());    
+			System.out.print(sc6.next() + "\n");    
 		}   
 		
 		sc6.close();	 
 	}
 	
-    public static void main( String[] args ) throws FileNotFoundException {
+    public static void search() {
+    	
+    }
+	
+	public static void main( String[] args ) throws FileNotFoundException {
     	
     	int userSelected;
     	
