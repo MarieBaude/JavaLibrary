@@ -4,18 +4,17 @@ public class Book {
 
 	private String title;
 	private String author;
-	private int numberOfPages;
-	private int numberOfCopy;
+	private String gender;
+	private String numberOfPages;
+	private String numberOfCopy;
 	
-	
-	
+
 	/**
 	 * @return the title
 	 */
 	public String getTitle() {
 		return title;
 	}
-
 
 
 	/**
@@ -26,14 +25,12 @@ public class Book {
 	}
 
 
-
 	/**
 	 * @return the author
 	 */
 	public String getAuthor() {
 		return author;
 	}
-
 
 
 	/**
@@ -44,46 +41,59 @@ public class Book {
 	}
 
 
+	/**
+	 * @return the gender
+	 */
+	public String getGender() {
+		return gender;
+	}
+
+
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 
 	/**
 	 * @return the numberOfPages
 	 */
-	public int getNumberOfPages() {
+	public String getNumberOfPages() {
 		return numberOfPages;
 	}
-
 
 
 	/**
 	 * @param numberOfPages the numberOfPages to set
 	 */
-	public void setNumberOfPages(int numberOfPages) {
+	public void setNumberOfPages(String numberOfPages) {
 		this.numberOfPages = numberOfPages;
 	}
-
 
 
 	/**
 	 * @return the numberOfCopy
 	 */
-	public int getNumberOfCopy() {
+	public String getNumberOfCopy() {
 		return numberOfCopy;
 	}
-
 
 
 	/**
 	 * @param numberOfCopy the numberOfCopy to set
 	 */
-	public void setNumberOfCopy(int numberOfCopy) {
+	public void setNumberOfCopy(String numberOfCopy) {
 		this.numberOfCopy = numberOfCopy;
 	}
 
 
 
-	Book (String title, String author, int numberOfPages, int numberOfCopy) {
+	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy) {
 		this.title = title;
 		this.author = author;
+		this.gender = gender;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
 	}
