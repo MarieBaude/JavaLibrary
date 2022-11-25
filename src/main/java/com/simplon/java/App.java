@@ -1,5 +1,7 @@
 package com.simplon.java;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +61,43 @@ public class App {
 	    }
 	}
 	
-    public static void main( String[] args ) {
-    	newBook();
+	public static void seeListOfBook() throws FileNotFoundException {
+		Scanner sc6 = new Scanner(new File("Books.csv")); 
+		
+		while (sc6.hasNext())  {  
+			System.out.print(sc6.next());    
+		}   
+		
+		sc6.close();	 
+	}
+	
+    public static void main( String[] args ) throws FileNotFoundException {
+    	//newBook();
+    	//seeListOfBook();
+    	
+    	int userSelected;
+    	
+    	do {
+    		userSelected = MenuData();
+    		switch(userSelected) {
+    		case 1:
+    			System.out.println("Listes des livres : 1");
+    			break;
+    		case 2:
+    			System.out.println("Rechercher un livre : 2");
+    			break;
+    		case 3:
+    			System.out.println("Modifier un livre : 3");
+    			break;
+    		case 4:
+    			System.out.println("Enregistrer un nouveau livre : 4");
+    		}
+    	}
 
     }
+
+	private static int MenuData() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
