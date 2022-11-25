@@ -72,8 +72,6 @@ public class App {
 	}
 	
     public static void main( String[] args ) throws FileNotFoundException {
-    	//newBook();
-    	//seeListOfBook();
     	
     	int userSelected;
     	
@@ -81,23 +79,36 @@ public class App {
     		userSelected = MenuData();
     		switch(userSelected) {
     		case 1:
-    			System.out.println("Listes des livres : 1");
+    			System.out.println("Liste des livres : ");
+    			seeListOfBook();
     			break;
     		case 2:
-    			System.out.println("Rechercher un livre : 2");
+    			System.out.println("Rechercher un livre : ");
     			break;
     		case 3:
-    			System.out.println("Modifier un livre : 3");
+    			System.out.println("Modifier un livre : ");
     			break;
     		case 4:
-    			System.out.println("Enregistrer un nouveau livre : 4");
+     			newBook();
+    		default:
+    			break;
     		}
     	}
+    	while(userSelected > 4);
 
     }
 
 	private static int MenuData() {
-		// TODO Auto-generated method stub
-		return 0;
+		int selection;
+		Scanner sc7 = new Scanner (System.in);
+		System.out.println("Selectionner votre option : ");
+		System.out.println("1) Listes des livres");
+		System.out.println("2) Rechercher un livre");
+		System.out.println("3) Modifier un livre");
+		System.out.println("4) Enregistrer un nouveau livre");
+
+		System.out.println("Votre sélection est : ");
+		selection = sc7.nextInt();
+		return selection;
 	}
 }
