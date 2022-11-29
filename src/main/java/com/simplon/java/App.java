@@ -46,7 +46,7 @@ public class App {
 	    String nbPages = sc4.nextLine();
 	    
 	    Scanner sc5 = new Scanner(System.in);
-	    System.out.print("Saisir le nombre d'emplaire : ");
+	    System.out.print("Saisir le nombre d'fileOfBooklaire : ");
 	    String nbCopy = sc5.nextLine();
 	    
 	    Book newBook = new Book(title, author, gender, nbPages, nbCopy);
@@ -90,36 +90,42 @@ public class App {
 		sc6.close();	 
 	}
 	
+	/**
+	 * OpenCSV CSVReader Example, Read all at once
+	 * 
+	 * @author Marie
+	 *
+	 */
 	public static void search() throws IOException {
 		Scanner scWord = new Scanner(System.in);
 	    System.out.print("Saisir votre recherche : ");
 	    String userText = scWord.nextLine();
 	    userText = userText.toLowerCase();
 	    
-	    try {
-	        FileReader filereader = new FileReader("Books.csv");
-	  
-	        CSVReader csvReader = new CSVReaderBuilder(filereader)
-	                                  .withSkipLines(1)
-	                                  .build();
-	        List<String[]> allData = csvReader.readAll();
-	  
-	        for (String[] row : allData) {
-	            for (String cell : row) {
-	                System.out.print(cell + "\t");
-	            }
-	            System.out.println();
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+	    CSVReader reader = new CSVReader(new FileReader("Books.csv"), ',');
+	    
+	    List<Book> fileOfBook = new ArrayList<Book>();
+	    String[] record = null;
+	    
+	    while ((record = reader.readNext()) != null) {
+			Book book = new Book(userText, userText, userText, null, null);
+			book.getTitle();
+			book.getAuthor();
+			book.getGender();
+			book.getNumberOfPages();
+			book.getNumberOfCopy();
+		}
+		
 	    
 	    /*if (fileOfBook.getTitle().equals(userText)) {
 	    	System.out.println(fileOfBook);
 	    } else {
 	    	System.out.println("Aucune correspondance");
 	    }*/
+	    
+	    reader.close();
     }
+	
     
     public static void updateBook() {
     	
