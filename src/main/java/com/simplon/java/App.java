@@ -109,33 +109,31 @@ public class App {
 	 * @author Marie
 	 *
 	 */
-	public static void updateBook() {
+	public static void updateBook(List<Book> listOfBook) {
 
+		System.out.println("Liste des livres disponible : ");
+		
+		seeListOfBook(listOfBook);
+    	
 		try {
-			List<Book> listOfBook = new ArrayList<Book>();
-			File bookFile = new File("Books.csv");
-			Scanner scFile = new Scanner(bookFile);
-			
-			while (scFile.hasNext()) {
-				String str = scFile.nextLine();
-				String[] bookInfo = str.split(","); // ne prends pas le premier livre
-				
-				String title = bookInfo[0];
-				String author = bookInfo[1];
-				String gender = bookInfo[2];
-				String numberOfPages = bookInfo[3];
-				String numberOfCopy = bookInfo[4];
-				
-				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
-				listOfBook.add(book);
-				System.out.println(book.justTitle());
-				
-				/*Scanner scNameBookUpdate = new Scanner(System.in);
-			    System.out.print("Saisir votre recherche : ");
-			    String nameBookUp = scNameBookUpdate.nextLine();
-			    nameBookUp = nameBookUp.toLowerCase();*/
-			    
+			Scanner scNameBookUpdate = new Scanner(System.in);
+		    System.out.print("Saisir le titre du livre à modifier : ");
+		    String nameBookUp = scNameBookUpdate.nextLine();
+		    nameBookUp = nameBookUp.toLowerCase();
+		    
+		    Scanner scNewTitle = new Scanner(System.in);
+		    System.out.print("Saisir le nouveau titre : ");
+		    String newTitle = scNewTitle.nextLine();
+		    newTitle = newTitle.toLowerCase();
+		    
+		    for (Book book : listOfBook) {
+		    	
+		    	if (book.getTitle().equals(nameBookUp)) {
+		    		book.setTitle(newTitle);
+		    		/*System.out.println(book.toStringBetter());*/
+				}
 			}
+		    seeListOfBook(listOfBook);
 		
 		} catch (Exception e) {
 			
@@ -148,14 +146,40 @@ public class App {
 	 * @author Marie
 	 *
 	 */
-	public static void seeListOfBook() throws FileNotFoundException {
-		Scanner sc6 = new Scanner(new File("Books.csv")); 
+	public static void seeListOfBook(List<Book> listOfBook) {
+		for (Book book : listOfBook) {
+			System.out.println(book.toStringBetter());
+		}	 
+	}
+	
+	public static List<Book> getList() {
+		List<Book> listOfBook = new ArrayList<Book>();
 		
-		while (sc6.hasNext())  {  
-			System.out.print(sc6.next() + "\n");    
-		}   
+		try {
+			Scanner scFile = new Scanner(new File("Books.csv"));
+			
+			while (scFile.hasNext()) {
+				String str = scFile.nextLine();
+				String[] bookInfo = str.split(",");
+				
+				String title = bookInfo[0];
+				String author = bookInfo[1];
+				String gender = bookInfo[2];
+				String numberOfPages = bookInfo[3];
+				String numberOfCopy = bookInfo[4];
+				
+				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
+				listOfBook.add(book);
+			}
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		sc6.close();	 
+		return listOfBook;
+		
 	}
 	
 	/**
@@ -203,7 +227,8 @@ public class App {
 				if (title.equals(userText)) {
 					book = new Book(title, author, gender, numberOfPages, numberOfCopy);
 				} 
-			}		    
+			}
+			
 			if (book.getTitle() != null) {				
 				System.out.println(book.toStringBetter());
 			} else {
@@ -240,19 +265,22 @@ public class App {
     	
     	int userSelected;
     	
+    	List<Book> listOfBook = getList();
+    	    	
+    	
     	do {
     		userSelected = menuData();
     		switch(userSelected) {
     		case 1:
     			System.out.println("Liste des livres : ");
-    			seeListOfBook();
+    			seeListOfBook(listOfBook);
     			break;
     		case 2:
     			search();
     			break;
     		case 3:
     			System.out.println("Modifier un livre : ");
-    			updateBook();
+    			updateBook(listOfBook);
     			break;
     		case 4:
      			newBook();
@@ -263,7 +291,7 @@ public class App {
     		}
     	}
     	while(userSelected > 5);
-
+    	// sauvegarde listOfBook ici
     }
 
 	
