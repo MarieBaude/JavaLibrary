@@ -88,14 +88,22 @@ public class Book {
 		this.numberOfCopy = numberOfCopy;
 	}
 
-
-
 	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy) {
 		this.title = title;
 		this.author = author;
 		this.gender = gender;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
+	}
+	
+	public StringBuilder toStringBetter() {
+		StringBuilder result = new StringBuilder();
+		result.append("Titre : ").append(this.getTitle()).append("\n");
+		result.append("Auteur : ").append(this.getAuthor()).append("\n");
+		result.append("Genre : ").append(this.getGender()).append("\n");
+		result.append("Nombre de pages : ").append(this.getNumberOfPages()).append("\n");
+		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
+		return result;
 	}
 
 

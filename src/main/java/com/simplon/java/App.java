@@ -133,36 +133,53 @@ public class App {
 	}
 	
 	/**
+	 * Import csv and add data in list
+	 * 
+	 * @author Marie
+	 *
+	 */
+	public static void importBook() {
+		try {
+			
+			List<Book> listOfBook = new ArrayList<Book>();
+			File bookFile = new File("Books.csv");
+			Scanner scFile = new Scanner(bookFile);
+			scFile.nextLine();
+			
+			// a améliorer avec FileReader
+			while (scFile.hasNext()) {
+				String str = scFile.nextLine();
+				String[] bookInfo = str.split(",");
+				
+				String title = bookInfo[0];
+				String author = bookInfo[1];
+				String gender = bookInfo[2];
+				String numberOfPages = bookInfo[3];
+				String numberOfCopy = bookInfo[4];
+				
+				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
+				listOfBook.add(book);
+				System.out.println(book.toStringBetter());
+			}
+		
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	/**
 	 * Search a book with his title
 	 * 
 	 * @author Marie
 	 *
 	 */
 	public static void search() throws IOException {
-		/*Scanner scImportFileBook = new Scanner(new File("Books.csv"));
-
-		List <Book> listBook = new ArrayList();
-		
-		while (scImportFileBook.hasNext()) {
-			System.out.print(scImportFileBook.next() + "\n");
-			listBook.add();
-		}
-		
-		scImportFileBook.close();*/
-		
-		List<String[]> collect =
-		          Files.lines(Paths.get("Books.csv"))
-		                .map(line -> line.split(","))
-		                .collect(Collectors.toList());
-	
-		
-		System.out.println(collect);
-		
+		importBook();
 		
 		/*Scanner scWord = new Scanner(System.in);
 	    System.out.print("Saisir votre recherche : ");
 	    String userText = scWord.nextLine();
-	    userText = userText.toLowerCase();*/ 
+	    userText = userText.toLowerCase();*/
 		
     }
 
