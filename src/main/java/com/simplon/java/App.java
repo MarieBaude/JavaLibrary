@@ -113,6 +113,12 @@ public class App {
 	    nameBookUp = nameBookUp.toLowerCase();
     }
 	
+	/**
+	 * Display a list of all books
+	 * 
+	 * @author Marie
+	 *
+	 */
 	public static void seeListOfBook() throws FileNotFoundException {
 		Scanner sc6 = new Scanner(new File("Books.csv")); 
 		
@@ -135,9 +141,8 @@ public class App {
 		List <Book> listBook = new ArrayList();
 		
 		while (scImportFileBook.hasNext()) {
-			listBook.add();
+			listBook.add(null);
 		}
-		
 		
 		Scanner scWord = new Scanner(System.in);
 	    System.out.print("Saisir votre recherche : ");
