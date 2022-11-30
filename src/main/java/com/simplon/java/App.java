@@ -6,10 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import org.jumpmind.symmetric.csv.CsvReader;
 
@@ -136,22 +139,31 @@ public class App {
 	 *
 	 */
 	public static void search() throws IOException {
-		Scanner scImportFileBook = new Scanner(new File("Books.csv"));
-		
+		/*Scanner scImportFileBook = new Scanner(new File("Books.csv"));
+
 		List <Book> listBook = new ArrayList();
 		
 		while (scImportFileBook.hasNext()) {
-			listBook.add(null);
+			System.out.print(scImportFileBook.next() + "\n");
+			listBook.add();
 		}
 		
-		Scanner scWord = new Scanner(System.in);
+		scImportFileBook.close();*/
+		
+		List<String[]> collect =
+		          Files.lines(Paths.get("Books.csv"))
+		                .map(line -> line.split(","))
+		                .collect(Collectors.toList());
+	
+		
+		System.out.println(collect);
+		
+		
+		/*Scanner scWord = new Scanner(System.in);
 	    System.out.print("Saisir votre recherche : ");
 	    String userText = scWord.nextLine();
-	    userText = userText.toLowerCase();
-	    
-	    
-	    scImportFileBook.close();
-
+	    userText = userText.toLowerCase();*/ 
+		
     }
 
 	/**
