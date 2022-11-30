@@ -139,6 +139,16 @@ public class App {
 	 *
 	 */
 	public static void importBook() {
+		
+	}
+	
+	/**
+	 * Search a book with his title
+	 * 
+	 * @author Marie
+	 *
+	 */
+	public static void search() {
 		try {
 			
 			List<Book> listOfBook = new ArrayList<Book>();
@@ -159,27 +169,25 @@ public class App {
 				
 				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
 				listOfBook.add(book);
-				System.out.println(book.toStringBetter());
+				
+				Scanner scWord = new Scanner(System.in);
+			    System.out.print("Saisir votre recherche : ");
+			    String userText = scWord.nextLine();
+			    userText = userText.toLowerCase();
+			    
+			    if (book.getTitle().equals(userText)) {
+			    	System.out.println(book.toStringBetter());
+			    	break;
+			    } else {
+			    	System.out.println("Pas de correspondance");
+			    }
 			}
 		
 		} catch (Exception e) {
 			
 		}
-	}
-	
-	/**
-	 * Search a book with his title
-	 * 
-	 * @author Marie
-	 *
-	 */
-	public static void search() throws IOException {
-		importBook();
 		
-		/*Scanner scWord = new Scanner(System.in);
-	    System.out.print("Saisir votre recherche : ");
-	    String userText = scWord.nextLine();
-	    userText = userText.toLowerCase();*/
+		
 		
     }
 
