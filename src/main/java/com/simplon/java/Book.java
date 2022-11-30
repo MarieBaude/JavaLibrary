@@ -105,6 +105,12 @@ public class Book {
 		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
 		return result;
 	}
+	
+	public StringBuilder justTitle() {
+		StringBuilder res = new StringBuilder();
+		res.append(this.getTitle()).append("\n");
+		return res;
+	}
 
 
 }

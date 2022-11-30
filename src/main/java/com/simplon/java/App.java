@@ -110,10 +110,38 @@ public class App {
 	 *
 	 */
 	public static void updateBook() {
-    	Scanner scNameBookUpdate = new Scanner(System.in);
-    	System.out.println("Nom du livre à mettre à jour : ");
-	    String nameBookUp = scNameBookUpdate.nextLine();
-	    nameBookUp = nameBookUp.toLowerCase();
+
+		try {
+			List<Book> listOfBook = new ArrayList<Book>();
+			File bookFile = new File("Books.csv");
+			Scanner scFile = new Scanner(bookFile);
+			scFile.nextLine();
+			
+			// a améliorer avec FileReader
+			while (scFile.hasNext()) {
+				String str = scFile.nextLine();
+				String[] bookInfo = str.split(",");
+				
+				String title = bookInfo[0];
+				String author = bookInfo[1];
+				String gender = bookInfo[2];
+				String numberOfPages = bookInfo[3];
+				String numberOfCopy = bookInfo[4];
+				
+				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
+				listOfBook.add(book);
+				System.out.println(book.justTitle());
+				
+				/*Scanner scNameBookUpdate = new Scanner(System.in);
+			    System.out.print("Saisir votre recherche : ");
+			    String nameBookUp = scNameBookUpdate.nextLine();
+			    nameBookUp = nameBookUp.toLowerCase();*/
+			    
+			}
+		
+		} catch (Exception e) {
+			
+		}
     }
 	
 	/**
@@ -149,8 +177,8 @@ public class App {
 	 *
 	 */
 	public static void search() {
+		
 		try {
-			
 			List<Book> listOfBook = new ArrayList<Book>();
 			File bookFile = new File("Books.csv");
 			Scanner scFile = new Scanner(bookFile);
@@ -177,7 +205,6 @@ public class App {
 			    
 			    if (book.getTitle().equals(userText)) {
 			    	System.out.println(book.toStringBetter());
-			    	break;
 			    } else {
 			    	System.out.println("Pas de correspondance");
 			    }
@@ -186,7 +213,6 @@ public class App {
 		} catch (Exception e) {
 			
 		}
-		
 		
 		
     }
