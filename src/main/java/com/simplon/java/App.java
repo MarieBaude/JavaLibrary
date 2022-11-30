@@ -15,7 +15,13 @@ import org.jumpmind.symmetric.csv.CsvReader;
 
 
 public class App {
-
+	
+	/**
+	 * Menu for all action
+	 * 
+	 * @author Marie
+	 *
+	 */
 	private static int menuData() {
 		int selection;
 		Scanner sc7 = new Scanner (System.in);
@@ -24,32 +30,44 @@ public class App {
 		System.out.println("2) Rechercher un livre");
 		System.out.println("3) Modifier un livre");
 		System.out.println("4) Enregistrer un nouveau livre");
+		System.out.println("5) Emprunter un livre");
 
 		System.out.println("Votre sélection est : ");
 		selection = sc7.nextInt();
 		return selection;
 	}
 	
+	/**
+	 * Enter a new book
+	 * 
+	 * @author Marie
+	 *
+	 */
 	public static void newBook() {
 		Scanner sc = new Scanner(System.in);
 	    System.out.print("Saisir le nom : ");
 	    String title = sc.nextLine();
+	    title = title.toLowerCase();
 	    
 	    Scanner sc2 = new Scanner(System.in);
 	    System.out.print("Saisir le nom de l'auteur : ");
 	    String author = sc2.nextLine();
+	    author = author.toLowerCase();
 	    
 	    Scanner sc3 = new Scanner(System.in);
 	    System.out.print("Saisir le genre : ");
 	    String gender = sc3.nextLine();
+	    gender = gender.toLowerCase();
 	    
 	    Scanner sc4 = new Scanner(System.in);
 	    System.out.print("Saisir le nombre de pages : ");
 	    String nbPages = sc4.nextLine();
+	    nbPages = nbPages.toLowerCase();
 	    
 	    Scanner sc5 = new Scanner(System.in);
 	    System.out.print("Saisir le nombre d'fileOfBooklaire : ");
 	    String nbCopy = sc5.nextLine();
+	    nbCopy = nbCopy.toLowerCase();
 	    
 	    Book newBook = new Book(title, author, gender, nbPages, nbCopy);
 	    
@@ -82,8 +100,17 @@ public class App {
 	    }
 	}
 	
+	/**
+	 * Update a existing book
+	 * 
+	 * @author Marie
+	 *
+	 */
 	public static void updateBook() {
-    	
+    	Scanner scNameBookUpdate = new Scanner(System.in);
+    	System.out.println("Nom du livre à mettre à jour : ");
+	    String nameBookUp = scNameBookUpdate.nextLine();
+	    nameBookUp = nameBookUp.toLowerCase();
     }
 	
 	public static void seeListOfBook() throws FileNotFoundException {
@@ -97,43 +124,50 @@ public class App {
 	}
 	
 	/**
-	 * OpenCSV CSVReader Example, Read all at once
+	 * Search a book with his title
 	 * 
 	 * @author Marie
 	 *
 	 */
 	public static void search() throws IOException {
+		Scanner scImportFileBook = new Scanner(new File("Books.csv"));
+		
+		List <Book> listBook = new ArrayList();
+		
+		while (scImportFileBook.hasNext()) {
+			listBook.add();
+		}
+		
+		
 		Scanner scWord = new Scanner(System.in);
 	    System.out.print("Saisir votre recherche : ");
 	    String userText = scWord.nextLine();
 	    userText = userText.toLowerCase();
 	    
-	    CSVReader reader = new CSVReader(new FileReader("Books.csv"), ',');
 	    
-	    List<Book> fileOfBook = new ArrayList<Book>();
-	    String[] record = null;
-	    
-	    while ((record = reader.readNext()) != null) {
-			Book book = new Book(userText, userText, userText, null, null);
-			book.getTitle();
-			book.getAuthor();
-			book.getGender();
-			book.getNumberOfPages();
-			book.getNumberOfCopy();
-		}
-		
-	    
-	    /*if (fileOfBook.getTitle().equals(userText)) {
-	    	System.out.println(fileOfBook);
-	    } else {
-	    	System.out.println("Aucune correspondance");
-	    }*/
-	    
-	    reader.close();
+	    scImportFileBook.close();
+
     }
+
+	/**
+	 * Loaning a book
+	 * 
+	 * @author Marie
+	 *
+	 */
+	public static void loaning() {
+		Scanner scNameBookLoan = new Scanner(System.in);
+		System.out.println("Nom du livre à emprunter : ");
+	    String nameBookLoan = scNameBookLoan.nextLine();
+	    nameBookLoan = nameBookLoan.toLowerCase();
+	}
 	
-    
- 
+	/**
+	 * Init menu and start function
+	 * 
+	 * @author Marie
+	 *
+	 */
 	
 	public static void main( String[] args ) throws IOException {
     	
@@ -155,11 +189,13 @@ public class App {
     			break;
     		case 4:
      			newBook();
+    		case 5:
+    			loaning();
     		default:
     			break;
     		}
     	}
-    	while(userSelected > 4);
+    	while(userSelected > 5);
 
     }
 
