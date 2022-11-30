@@ -87,6 +87,7 @@ public class Book {
 	public void setNumberOfCopy(String numberOfCopy) {
 		this.numberOfCopy = numberOfCopy;
 	}
+	
 
 	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy) {
 		this.title = title;
@@ -94,6 +95,10 @@ public class Book {
 		this.gender = gender;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
+	}
+	
+	Book () {
+		
 	}
 	
 	public StringBuilder toStringBetter() {

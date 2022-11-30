@@ -181,6 +181,13 @@ public class App {
 			File bookFile = new File("Books.csv");
 			Scanner scFile = new Scanner(bookFile);
 			
+			Scanner scWord = new Scanner(System.in);
+		    System.out.print("Saisir un titre : ");
+		    String userText = scWord.nextLine();
+		    userText = userText.toLowerCase();
+		    
+		    Book book = new Book();
+			
 			while (scFile.hasNext()) {
 				String str = scFile.nextLine();
 				String[] bookInfo = str.split(",");
@@ -191,28 +198,17 @@ public class App {
 				String numberOfPages = bookInfo[3];
 				String numberOfCopy = bookInfo[4];
 				
-				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
 				listOfBook.add(book);
+				
+				if (title.equals(userText)) {
+					book = new Book(title, author, gender, numberOfPages, numberOfCopy);
+				} 
+			}		    
+			if (book.getTitle() != null) {				
+				System.out.println(book.toStringBetter());
+			} else {
+				System.out.println("Aucune correspondance");
 			}
-			
-			System.out.println(listOfBook);
-			
-			
-			
-			/*Scanner scWord = new Scanner(System.in);
-		    System.out.print("Saisir votre recherche : ");
-		    String userText = scWord.nextLine();
-		    userText = userText.toLowerCase();*/
-		    
-		    
-			
-			/*
-			
-			if (book.getTitle().equals(userText)) {
-		    	System.out.println(book.toStringBetter());
-		    } else {
-		    	System.out.println("Pas de correspondance");
-		    }*/
 		
 		} catch (Exception e) {
 			
