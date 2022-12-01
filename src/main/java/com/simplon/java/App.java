@@ -31,8 +31,10 @@ public class App {
 		System.out.println("Selectionner votre option : ");
 		System.out.println("1) Listes des livres");
 		System.out.println("2) Rechercher un livre");
-		System.out.println("3) Modifier un livre");
-		System.out.println("4) Enregistrer un nouveau livre");
+		
+		System.out.println("3) Enregistrer un nouveau livre");
+		System.out.println("4) Modifier un livre");
+		
 		System.out.println("5) Emprunter un livre");
 		System.out.println("6) Rendre un livre");
 
@@ -314,8 +316,36 @@ public class App {
 	 * @author Marie
 	 *
 	 */
-	public static void returnBook() {
+	public static List<Book> returnBook(List<Book> listOfBook) {
+		try {
+			Scanner scNameBookReturn = new Scanner(System.in);
+		    System.out.print("Nom du livre à rendre : ");
+		    String nameBookReturn = scNameBookReturn.nextLine();
+		    nameBookReturn = nameBookReturn.toLowerCase();
+		    
+		    String statusTrue = "indisponible";
+		    String statusFalse = "disponible";
+		    Boolean isLoaned = true;
+		    
+		    for (Book book : listOfBook) {
+		    	if (book.getTitle().equals(nameBookReturn) && book.getStatus().equals(statusTrue)) {
+		    		book.setStatus(statusFalse);
+		    		isLoaned = false;
+				} 
+			}
+		    
+		    if(isLoaned) {
+		    	System.out.println("Ce livre n'a pas été emprunter");
+		    	
+		    } else {
+		    	System.out.println("Livre bien rendu");
+		    }
 		
+		} catch (Exception e) {
+			
+		}
+		
+		return listOfBook;
 	}
 	
 	/**
@@ -342,16 +372,16 @@ public class App {
     			search();
     			break;
     		case 3:
-    			listOfBook = updateBook(listOfBook);
+    			listOfBook.add(newBook());
     			break;
     		case 4:
-    			listOfBook.add(newBook());
+    			listOfBook = updateBook(listOfBook);
      			break;
     		case 5:
     			listOfBook = loaning(listOfBook);
     			break;
     		case 6:
-    			returnBook();
+    			listOfBook = returnBook(listOfBook);
     			break;
     		default:
     			break;
