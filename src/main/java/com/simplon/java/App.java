@@ -288,9 +288,9 @@ public class App {
 		    Boolean isLoaned = false;
 		    
 		    for (Book book : listOfBook) {
-		    	if (book.getTitle().equals(nameBookLoan)) {
-		    		isLoaned = true;
+		    	if (book.getTitle().equals(nameBookLoan) && book.getStatus().equals(statusFalse)) {
 		    		book.setStatus(statusTrue);
+		    		isLoaned = true;
 				} 
 			}
 		    
