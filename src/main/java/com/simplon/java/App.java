@@ -34,6 +34,7 @@ public class App {
 		System.out.println("3) Modifier un livre");
 		System.out.println("4) Enregistrer un nouveau livre");
 		System.out.println("5) Emprunter un livre");
+		System.out.println("6) Rendre un livre");
 
 		System.out.println("Votre sélection est : ");
 		selection = sc7.nextInt();
@@ -69,13 +70,68 @@ public class App {
 			
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return listOfBook;
 		
 	}
+	
+	/**
+	 * Save a list of book, new or update
+	 * 
+	 * @author Marie
+	 *
+	 */	
+	public static void saveListOfBook(List<Book> listOfBook) {
+		FileWriter file = null;
+        
+        final String DELIMITER = ",";
+        final String SEPARATOR = "\n";
+        
+        try {
+        	file = new FileWriter("Books.csv");
+        	
+        	for (Book book : listOfBook) {
+    			
+  			  file.append(book.getTitle());
+  	          file.append(DELIMITER);
+  	          file.append(book.getAuthor());
+  	          file.append(DELIMITER);
+  	          file.append(book.getGender());
+  	          file.append(DELIMITER);
+  	          file.append(book.getNumberOfPages());
+  	          file.append(DELIMITER);
+  	          file.append(book.getNumberOfCopy());
+  	          file.append(DELIMITER);
+  	          file.append(book.getStatus());
+  	          file.append(DELIMITER);
+  	          
+  	          file.append(SEPARATOR); 
+  	         }
+        	
+        	file.close();
+        	
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+		
+	}
+	
+	
+	/**
+	 * Display a list of all books
+	 * 
+	 * @author Marie
+	 *
+	 */
+	public static void seeListOfBook(List<Book> listOfBook) {
+		System.out.println("Liste des livres : ");
+		for (Book book : listOfBook) {
+			System.out.println(book.toStringBetter());
+		}	 
+	}
+	
 	
 	/**
 	 * Enter a new book
@@ -147,13 +203,6 @@ public class App {
 		    	
 		    	if (book.getTitle().equals(nameBookUp)) {
 		    		book.setTitle(newTitle);
-		    		
-		    		FileWriter file = null;
-					
-					file = new FileWriter("Books.csv", true);
-			          file.append(book.getTitle());
-		    
-			        file.close();
 				}
 			}
 		    
@@ -167,59 +216,6 @@ public class App {
 		return listOfBook;
     }
 	
-	/**
-	 * Save a list of book, new or update
-	 * 
-	 * @author Marie
-	 *
-	 */	
-	public static void saveListOfBook(List<Book> listOfBook) {
-		FileWriter file = null;
-        
-        final String DELIMITER = ",";
-        final String SEPARATOR = "\n";
-        
-        try {
-        	file = new FileWriter("Books.csv");
-        	
-        	for (Book book : listOfBook) {
-    			
-  			  file.append(book.getTitle());
-  	          file.append(DELIMITER);
-  	          file.append(book.getAuthor());
-  	          file.append(DELIMITER);
-  	          file.append(book.getGender());
-  	          file.append(DELIMITER);
-  	          file.append(book.getNumberOfPages());
-  	          file.append(DELIMITER);
-  	          file.append(book.getNumberOfCopy());
-  	          file.append(DELIMITER);
-  	          file.append(book.getStatus());
-  	          file.append(DELIMITER);
-  	          
-  	          file.append(SEPARATOR); 
-  	         }
-        	
-        	file.close();
-        	
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-		
-	}
-	
-	/**
-	 * Display a list of all books
-	 * 
-	 * @author Marie
-	 *
-	 */
-	public static void seeListOfBook(List<Book> listOfBook) {
-		for (Book book : listOfBook) {
-			System.out.println(book.toStringBetter());
-		}	 
-	}
-		
 	
 	/**
 	 * Search a book with his title
@@ -271,17 +267,52 @@ public class App {
 		
     }
 
+	
 	/**
 	 * Loaning a book
 	 * 
 	 * @author Marie
 	 *
 	 */
-	public static void loaning() {
-		Scanner scNameBookLoan = new Scanner(System.in);
-		System.out.println("Nom du livre à emprunter : ");
-	    String nameBookLoan = scNameBookLoan.nextLine();
-	    nameBookLoan = nameBookLoan.toLowerCase();
+	
+	public static List<Book> loaning(List<Book> listOfBook) {
+	    
+	    try {
+			Scanner scNameBookLoan = new Scanner(System.in);
+		    System.out.print("Nom du livre à emprunter : ");
+		    String nameBookLoan = scNameBookLoan.nextLine();
+		    nameBookLoan = nameBookLoan.toLowerCase();
+		    
+		    String statusTrue = "indisponible";
+		    String statusFalse = "disponible";
+		    Boolean isLoaned = false;
+		    
+		    
+		    	
+		    	for (Book book : listOfBook) {
+			    	
+			    	if (book.getTitle().equals(nameBookLoan)) {
+			    		
+			    		book.setStatus(statusTrue);	
+			    		
+			    		FileWriter file = null;
+						
+						file = new FileWriter("Books.csv", true);
+				          file.append(book.getStatus());
+			    
+				        file.close();
+				        System.out.println("Livre bien emprunter");
+					} 
+				}
+		    
+		    
+		    
+		
+		} catch (Exception e) {
+			
+		}
+		
+		return listOfBook;
 	}
 	
 	/**
@@ -312,21 +343,19 @@ public class App {
     		userSelected = menuData();
     		switch(userSelected) {
     		case 1:
-    			System.out.println("Liste des livres : ");
     			seeListOfBook(listOfBook);
     			break;
     		case 2:
     			search();
     			break;
     		case 3:
-    			System.out.println("Modifier un livre : ");
     			listOfBook = updateBook(listOfBook);
     			break;
     		case 4:
     			listOfBook.add(newBook());
      			break;
     		case 5:
-    			loaning();
+    			listOfBook = loaning(listOfBook);
     			break;
     		case 6:
     			returnBook();
