@@ -7,6 +7,7 @@ public class Book {
 	private String gender;
 	private String numberOfPages;
 	private String numberOfCopy;
+	private String status;
 	
 
 	/**
@@ -88,13 +89,31 @@ public class Book {
 		this.numberOfCopy = numberOfCopy;
 	}
 	
+	
 
-	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy) {
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy, String status) {
 		this.title = title;
 		this.author = author;
 		this.gender = gender;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
+		this.status = status;
 	}
 	
 	Book () {
@@ -108,6 +127,7 @@ public class Book {
 		result.append("Genre : ").append(this.getGender()).append("\n");
 		result.append("Nombre de pages : ").append(this.getNumberOfPages()).append("\n");
 		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
+		result.append("Statue : ").append(this.getStatus()).append("\n");
 		return result;
 	}
 	

@@ -72,7 +72,9 @@ public class App {
 	    String nbCopy = sc5.nextLine();
 	    nbCopy = nbCopy.toLowerCase();
 	    
-	    Book newBook = new Book(title, author, gender, nbPages, nbCopy);
+	    String status = "disponible";
+	    
+	    Book newBook = new Book(title, author, gender, nbPages, nbCopy, status);
 	    
 	    List bookList = new ArrayList();
 	    bookList.add(newBook);
@@ -124,16 +126,24 @@ public class App {
 		    Scanner scNewTitle = new Scanner(System.in);
 		    System.out.print("Saisir le nouveau titre : ");
 		    String newTitle = scNewTitle.nextLine();
-		    newTitle = newTitle.toLowerCase();
+		    newTitle = newTitle.toLowerCase();		    
 		    
 		    for (Book book : listOfBook) {
 		    	
 		    	if (book.getTitle().equals(nameBookUp)) {
 		    		book.setTitle(newTitle);
-		    		/*System.out.println(book.toStringBetter());*/
+		    		
+		    		FileWriter file = null;
+					
+					file = new FileWriter("Books.csv", true);
+			          file.append(book.getTitle());
+		    
+			        file.close();
 				}
 			}
+		    
 		    seeListOfBook(listOfBook);
+		    
 		
 		} catch (Exception e) {
 			
@@ -167,8 +177,9 @@ public class App {
 				String gender = bookInfo[2];
 				String numberOfPages = bookInfo[3];
 				String numberOfCopy = bookInfo[4];
+				String status = bookInfo[5];
 				
-				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
+				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy, status);
 				listOfBook.add(book);
 			}
 			
@@ -182,15 +193,6 @@ public class App {
 		
 	}
 	
-	/**
-	 * Import csv and add data in list
-	 * 
-	 * @author Marie
-	 *
-	 */
-	public static void importBook() {
-		
-	}
 	
 	/**
 	 * Search a book with his title
@@ -221,11 +223,12 @@ public class App {
 				String gender = bookInfo[2];
 				String numberOfPages = bookInfo[3];
 				String numberOfCopy = bookInfo[4];
+				String status = bookInfo[5];
 				
 				listOfBook.add(book);
 				
 				if (title.equals(userText)) {
-					book = new Book(title, author, gender, numberOfPages, numberOfCopy);
+					book = new Book(title, author, gender, numberOfPages, numberOfCopy, status);
 				} 
 			}
 			
