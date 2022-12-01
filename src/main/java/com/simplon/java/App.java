@@ -81,9 +81,10 @@ public class App {
 	 * Enter a new book
 	 * 
 	 * @author Marie
+	 * @return 
 	 *
 	 */
-	public static void newBook() {
+	public static Book newBook() {
 		Scanner sc = new Scanner(System.in);
 	    System.out.print("Saisir le nom : ");
 	    String title = sc.nextLine();
@@ -113,36 +114,8 @@ public class App {
 	    
 	    Book newBook = new Book(title, author, gender, nbPages, nbCopy, status);
 	    
-	    List bookList = new ArrayList();
-	    bookList.add(newBook);
-		
-		FileWriter file = null;
-				
-		final String DELIMITER = ",";
-		final String SEPARATOR = "\n";
-		
-		try {
-			file = new FileWriter("Books.csv", true);
-	          file.append(newBook.getTitle());
-	          file.append(DELIMITER);
-	          file.append(newBook.getAuthor());
-	          file.append(DELIMITER);
-	          file.append(newBook.getGender());
-	          file.append(DELIMITER);
-	          file.append(newBook.getNumberOfPages());
-	          file.append(DELIMITER);
-	          file.append(newBook.getNumberOfCopy());
-	          file.append(DELIMITER);
-	          file.append(newBook.getStatus());
-	          file.append(DELIMITER);
-	          
-	          file.append(SEPARATOR);
-      
-	        file.close();
-	        System.out.println("Bien enregistrer");
-		} catch(Exception e) {
-			e.printStackTrace();
-	    }
+	    return newBook;
+	    
 	}
 	
 	/**
@@ -188,7 +161,51 @@ public class App {
 		} catch (Exception e) {
 			
 		}
+		
+		return listOfBook();
     }
+	
+	/**
+	 * Save a list of book, new or update
+	 * 
+	 * @author Marie
+	 *
+	 */	
+	public static void saveListOfBook(List<Book> listOfBook) {
+		FileWriter file = null;
+        
+        final String DELIMITER = ",";
+        final String SEPARATOR = "\n";
+        
+        try {
+        	file = new FileWriter("Books.csv", true);
+        	
+        	for (Book book : listOfBook) {
+    			
+  			  file.append(book.getTitle());
+  	          file.append(DELIMITER);
+  	          file.append(book.getAuthor());
+  	          file.append(DELIMITER);
+  	          file.append(book.getGender());
+  	          file.append(DELIMITER);
+  	          file.append(book.getNumberOfPages());
+  	          file.append(DELIMITER);
+  	          file.append(book.getNumberOfCopy());
+  	          file.append(DELIMITER);
+  	          file.append(book.getStatus());
+  	          file.append(DELIMITER);
+  	          
+  	          file.append(SEPARATOR); 
+  	         }
+        	
+        	file.close();
+            System.out.println("Bien enregistrer");
+        	
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+		
+	}
 	
 	/**
 	 * Display a list of all books
@@ -302,10 +319,10 @@ public class App {
     			break;
     		case 3:
     			System.out.println("Modifier un livre : ");
-    			updateBook(listOfBook);
+    			listOfBook = update(listOfBook);
     			break;
     		case 4:
-     			newBook();
+    			listOfBook.add(newBook());
      			break;
     		case 5:
     			loaning();
@@ -318,8 +335,13 @@ public class App {
     		}
     	}
     	while(userSelected > 6);
-    	// sauvegarde listOfBook ici
+    	saveListOfBook(listOfBook);
     }
+
+	private static List<Book> update(List<Book> listOfBook) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 }
