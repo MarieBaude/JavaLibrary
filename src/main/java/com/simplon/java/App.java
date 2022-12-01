@@ -114,6 +114,7 @@ public class App {
 	    
 	    Book newBook = new Book(title, author, gender, nbPages, nbCopy, status);
 	    
+	    System.out.println("Bien enregistrer");
 	    return newBook;
 	    
 	}
@@ -122,9 +123,10 @@ public class App {
 	 * Update a existing book
 	 * 
 	 * @author Marie
+	 * @return 
 	 *
 	 */
-	public static void updateBook(List<Book> listOfBook) {
+	public static List<Book> updateBook(List<Book> listOfBook) {
 
 		System.out.println("Liste des livres disponible : ");
 		
@@ -162,7 +164,7 @@ public class App {
 			
 		}
 		
-		return listOfBook();
+		return listOfBook;
     }
 	
 	/**
@@ -178,7 +180,7 @@ public class App {
         final String SEPARATOR = "\n";
         
         try {
-        	file = new FileWriter("Books.csv", true);
+        	file = new FileWriter("Books.csv");
         	
         	for (Book book : listOfBook) {
     			
@@ -199,7 +201,6 @@ public class App {
   	         }
         	
         	file.close();
-            System.out.println("Bien enregistrer");
         	
         } catch(Exception e) {
             e.printStackTrace();
@@ -319,7 +320,7 @@ public class App {
     			break;
     		case 3:
     			System.out.println("Modifier un livre : ");
-    			listOfBook = update(listOfBook);
+    			listOfBook = updateBook(listOfBook);
     			break;
     		case 4:
     			listOfBook.add(newBook());
@@ -337,11 +338,6 @@ public class App {
     	while(userSelected > 6);
     	saveListOfBook(listOfBook);
     }
-
-	private static List<Book> update(List<Book> listOfBook) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }
