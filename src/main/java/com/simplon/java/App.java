@@ -287,26 +287,19 @@ public class App {
 		    String statusFalse = "disponible";
 		    Boolean isLoaned = false;
 		    
+		    for (Book book : listOfBook) {
+		    	if (book.getTitle().equals(nameBookLoan)) {
+		    		isLoaned = true;
+		    		book.setStatus(statusTrue);
+				} 
+			}
 		    
+		    if(isLoaned) {
+		    	System.out.println("Livre bien emprunter");
 		    	
-		    	for (Book book : listOfBook) {
-			    	
-			    	if (book.getTitle().equals(nameBookLoan)) {
-			    		
-			    		book.setStatus(statusTrue);	
-			    		
-			    		FileWriter file = null;
-						
-						file = new FileWriter("Books.csv", true);
-				          file.append(book.getStatus());
-			    
-				        file.close();
-				        System.out.println("Livre bien emprunter");
-					} 
-				}
-		    
-		    
-		    
+		    } else {
+		    	System.out.println("Livre non disponible");
+		    }
 		
 		} catch (Exception e) {
 			
