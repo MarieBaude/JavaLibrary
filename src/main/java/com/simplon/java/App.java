@@ -41,6 +41,43 @@ public class App {
 	}
 	
 	/**
+	 * List of all books
+	 * 
+	 * @author Marie
+	 *
+	 */
+	public static List<Book> getList() {
+		List<Book> listOfBook = new ArrayList<Book>();
+		
+		try {
+			Scanner scFile = new Scanner(new File("Books.csv"));
+			
+			while (scFile.hasNext()) {
+				String str = scFile.nextLine();
+				String[] bookInfo = str.split(",");
+				
+				String title = bookInfo[0];
+				String author = bookInfo[1];
+				String gender = bookInfo[2];
+				String numberOfPages = bookInfo[3];
+				String numberOfCopy = bookInfo[4];
+				String status = bookInfo[5];
+				
+				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy, status);
+				listOfBook.add(book);
+			}
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listOfBook;
+		
+	}
+	
+	/**
 	 * Enter a new book
 	 * 
 	 * @author Marie
@@ -68,7 +105,7 @@ public class App {
 	    nbPages = nbPages.toLowerCase();
 	    
 	    Scanner sc5 = new Scanner(System.in);
-	    System.out.print("Saisir le nombre d'fileOfBooklaire : ");
+	    System.out.print("Saisir le nombre d'exemplaire : ");
 	    String nbCopy = sc5.nextLine();
 	    nbCopy = nbCopy.toLowerCase();
 	    
@@ -96,10 +133,13 @@ public class App {
 	          file.append(DELIMITER);
 	          file.append(newBook.getNumberOfCopy());
 	          file.append(DELIMITER);
+	          file.append(newBook.getStatus());
+	          file.append(DELIMITER);
 	          
 	          file.append(SEPARATOR);
       
 	        file.close();
+	        System.out.println("Bien enregistrer");
 		} catch(Exception e) {
 			e.printStackTrace();
 	    }
@@ -161,38 +201,7 @@ public class App {
 			System.out.println(book.toStringBetter());
 		}	 
 	}
-	
-	public static List<Book> getList() {
-		List<Book> listOfBook = new ArrayList<Book>();
 		
-		try {
-			Scanner scFile = new Scanner(new File("Books.csv"));
-			
-			while (scFile.hasNext()) {
-				String str = scFile.nextLine();
-				String[] bookInfo = str.split(",");
-				
-				String title = bookInfo[0];
-				String author = bookInfo[1];
-				String gender = bookInfo[2];
-				String numberOfPages = bookInfo[3];
-				String numberOfCopy = bookInfo[4];
-				String status = bookInfo[5];
-				
-				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy, status);
-				listOfBook.add(book);
-			}
-			
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return listOfBook;
-		
-	}
-	
 	
 	/**
 	 * Search a book with his title
@@ -258,6 +267,16 @@ public class App {
 	}
 	
 	/**
+	 * Return a book
+	 * 
+	 * @author Marie
+	 *
+	 */
+	public static void returnBook() {
+		
+	}
+	
+	/**
 	 * Init menu and start function
 	 * 
 	 * @author Marie
@@ -287,13 +306,18 @@ public class App {
     			break;
     		case 4:
      			newBook();
+     			break;
     		case 5:
     			loaning();
+    			break;
+    		case 6:
+    			returnBook();
+    			break;
     		default:
     			break;
     		}
     	}
-    	while(userSelected > 5);
+    	while(userSelected > 6);
     	// sauvegarde listOfBook ici
     }
 
