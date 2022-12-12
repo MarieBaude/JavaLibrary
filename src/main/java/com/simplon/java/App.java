@@ -27,7 +27,7 @@ public class App {
 	 */
 	private static int menuData() {
 		int selection;
-		Scanner sc7 = new Scanner (System.in);
+		Scanner scMenu = new Scanner (System.in);
 		System.out.println("Selectionner votre option : ");
 		System.out.println("1) Listes des livres");
 		System.out.println("2) Rechercher un livre");
@@ -39,7 +39,7 @@ public class App {
 		System.out.println("6) Rendre un livre");
 
 		System.out.println("Votre sélection est : ");
-		selection = sc7.nextInt();
+		selection = scMenu.nextInt();
 		return selection;
 	}
 	
@@ -64,9 +64,8 @@ public class App {
 				String gender = bookInfo[2];
 				String numberOfPages = bookInfo[3];
 				String numberOfCopy = bookInfo[4];
-				String status = bookInfo[5];
 				
-				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy, status);
+				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
 				listOfBook.add(book);
 			}
 			
@@ -105,8 +104,6 @@ public class App {
   	          file.append(book.getNumberOfPages());
   	          file.append(DELIMITER);
   	          file.append(book.getNumberOfCopy());
-  	          file.append(DELIMITER);
-  	          file.append(book.getStatus());
   	          file.append(DELIMITER);
   	          
   	          file.append(SEPARATOR); 
@@ -168,9 +165,7 @@ public class App {
 	    String nbCopy = sc5.nextLine();
 	    nbCopy = nbCopy.toLowerCase();
 	    
-	    String status = "disponible";
-	    
-	    Book newBook = new Book(title, author, gender, nbPages, nbCopy, status);
+	    Book newBook = new Book(title, author, gender, nbPages, nbCopy);
 	    
 	    System.out.println("Bien enregistrer");
 	    return newBook;
@@ -248,12 +243,11 @@ public class App {
 				String gender = bookInfo[2];
 				String numberOfPages = bookInfo[3];
 				String numberOfCopy = bookInfo[4];
-				String status = bookInfo[5];
 				
 				listOfBook.add(book);
 				
 				if (title.equals(userText)) {
-					book = new Book(title, author, gender, numberOfPages, numberOfCopy, status);
+					book = new Book(title, author, gender, numberOfPages, numberOfCopy);
 				} 
 			}
 			

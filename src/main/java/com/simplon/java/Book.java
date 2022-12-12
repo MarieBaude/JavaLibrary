@@ -107,13 +107,12 @@ public class Book {
 	}
 
 
-	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy, String status) {
+	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy) {
 		this.title = title;
 		this.author = author;
 		this.gender = gender;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
-		this.status = status;
 	}
 	
 	Book () {
@@ -127,7 +126,6 @@ public class Book {
 		result.append("Genre : ").append(this.getGender()).append("\n");
 		result.append("Nombre de pages : ").append(this.getNumberOfPages()).append("\n");
 		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
-		result.append("Statue : ").append(this.getStatus()).append("\n");
 		return result;
 	}
 	
