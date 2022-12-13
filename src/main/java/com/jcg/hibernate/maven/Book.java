@@ -25,10 +25,10 @@ public class Book {
 	private String gender;
 	
 	@Column(name = "nbpage")
-	private String numberOfPages;
+	private int numberOfPages;
 	
 	@Column(name = "nbex")
-	private String numberOfCopy;
+	private int numberOfCopy;
 	
 
 	/**
@@ -98,7 +98,7 @@ public class Book {
 	/**
 	 * @return the numberOfPages
 	 */
-	public String getNumberOfPages() {
+	public int getNumberOfPages() {
 		return numberOfPages;
 	}
 
@@ -106,7 +106,7 @@ public class Book {
 	/**
 	 * @param numberOfPages the numberOfPages to set
 	 */
-	public void setNumberOfPages(String numberOfPages) {
+	public void setNumberOfPages(int numberOfPages) {
 		this.numberOfPages = numberOfPages;
 	}
 
@@ -114,7 +114,7 @@ public class Book {
 	/**
 	 * @return the numberOfCopy
 	 */
-	public String getNumberOfCopy() {
+	public int getNumberOfCopy() {
 		return numberOfCopy;
 	}
 
@@ -122,12 +122,12 @@ public class Book {
 	/**
 	 * @param numberOfCopy the numberOfCopy to set
 	 */
-	public void setNumberOfCopy(String numberOfCopy) {
+	public void setNumberOfCopy(int numberOfCopy) {
 		this.numberOfCopy = numberOfCopy;
 	}
 
 
-	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy) {
+	Book (String title, String author, String gender, int numberOfPages, int numberOfCopy) {
 		this.title = title;
 		this.author = author;
 		this.gender = gender;

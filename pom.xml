@@ -40,18 +40,18 @@
 	    <type>pom</type>
 	</dependency>
 	
+	<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+	<dependency>
+	    <groupId>org.hibernate.javax.persistence</groupId>
+	    <artifactId>hibernate-jpa-2.1-api</artifactId>
+	    <version>1.0.2.Final</version>
+	</dependency>
+	
 	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 	<dependency>
 	    <groupId>org.postgresql</groupId>
 	    <artifactId>postgresql</artifactId>
 	    <version>42.5.1</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/javax.persistence -->
-	<dependency>
-	    <groupId>org.eclipse.persistence</groupId>
-	    <artifactId>javax.persistence</artifactId>
-	    <version>2.2.1</version>
 	</dependency>
 
     

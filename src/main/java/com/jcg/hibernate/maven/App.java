@@ -1,20 +1,12 @@
 package com.jcg.hibernate.maven;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-
-import org.jumpmind.symmetric.csv.CsvReader;
 
 
 public class App {
@@ -271,7 +263,7 @@ public class App {
 	 *
 	 */
 	
-	public static List<Book> loaning(List<Book> listOfBook) {
+	/*public static List<Book> loaning(List<Book> listOfBook) {
 	    
 	    try {
 			Scanner scNameBookLoan = new Scanner(System.in);
@@ -302,7 +294,7 @@ public class App {
 		}
 		
 		return listOfBook;
-	}
+	}*/
 	
 	/**
 	 * Return a book
@@ -310,7 +302,7 @@ public class App {
 	 * @author Marie
 	 *
 	 */
-	public static List<Book> returnBook(List<Book> listOfBook) {
+	/*public static List<Book> returnBook(List<Book> listOfBook) {
 		try {
 			Scanner scNameBookReturn = new Scanner(System.in);
 		    System.out.print("Nom du livre à rendre : ");
@@ -340,7 +332,7 @@ public class App {
 		}
 		
 		return listOfBook;
-	}
+	}*/
 	
 	/**
 	 * Init menu and start function
@@ -372,10 +364,10 @@ public class App {
     			listOfBook = updateBook(listOfBook);
      			break;
     		case 5:
-    			listOfBook = loaning(listOfBook);
+    			//listOfBook = loaning(listOfBook);
     			break;
     		case 6:
-    			listOfBook = returnBook(listOfBook);
+    			//listOfBook = returnBook(listOfBook);
     			break;
     		default:
     			break;
