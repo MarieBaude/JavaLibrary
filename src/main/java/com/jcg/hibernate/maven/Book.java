@@ -30,7 +30,6 @@ public class Book {
 	@Column(name = "nbex")
 	private String numberOfCopy;
 	
-	
 
 	/**
 	 * @return the idbook
@@ -150,11 +149,5 @@ public class Book {
 		return result;
 	}
 	
-	public StringBuilder justTitle() {
-		StringBuilder res = new StringBuilder();
-		res.append(this.getTitle()).append("\n");
-		return res;
-	}
-
 
 }
