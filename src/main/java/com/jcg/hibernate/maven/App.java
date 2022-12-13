@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class App {
 	
+	
 	/**
 	 * Menu for all action
 	 * 
@@ -29,6 +30,8 @@ public class App {
 		
 		System.out.println("5) Emprunter un livre");
 		System.out.println("6) Rendre un livre");
+		
+		System.out.println("7) Quitter le programme");
 
 		System.out.println("Votre sélection est : ");
 		selection = scMenu.nextInt();
@@ -41,7 +44,7 @@ public class App {
 	 * @author Marie
 	 *
 	 */
-	public static List<Book> getList() {
+	/*public static List<Book> getList() {
 		List<Book> listOfBook = new ArrayList<Book>();
 		
 		try {
@@ -54,8 +57,8 @@ public class App {
 				String title = bookInfo[0];
 				String author = bookInfo[1];
 				String gender = bookInfo[2];
-				String numberOfPages = bookInfo[3];
-				String numberOfCopy = bookInfo[4];
+				int numberOfPages = bookInfo[3];
+				int numberOfCopy = bookInfo[4];
 				
 				Book book = new Book(title, author, gender, numberOfPages, numberOfCopy);
 				listOfBook.add(book);
@@ -68,7 +71,7 @@ public class App {
 		
 		return listOfBook;
 		
-	}
+	}*/
 	
 	/**
 	 * Save a list of book, new or update
@@ -76,7 +79,7 @@ public class App {
 	 * @author Marie
 	 *
 	 */	
-	public static void saveListOfBook(List<Book> listOfBook) {
+	/*public static void saveListOfBook(List<Book> listOfBook) {
 		FileWriter file = null;
         
         final String DELIMITER = ",";
@@ -107,7 +110,7 @@ public class App {
             e.printStackTrace();
         }
 		
-	}
+	}*/
 	
 	
 	/**
@@ -116,12 +119,12 @@ public class App {
 	 * @author Marie
 	 *
 	 */
-	public static void seeListOfBook(List<Book> listOfBook) {
+	/*public static void seeListOfBook(List<Book> listOfBook) {
 		System.out.println("Liste des livres : ");
 		for (Book book : listOfBook) {
 			System.out.println(book.toStringBetter());
 		}	 
-	}
+	}*/
 	
 	
 	/**
@@ -131,7 +134,7 @@ public class App {
 	 * @return 
 	 *
 	 */
-	public static Book newBook() {
+	/*public static Book newBook() {
 		Scanner sc = new Scanner(System.in);
 	    System.out.print("Saisir le nom : ");
 	    String title = sc.nextLine();
@@ -162,7 +165,7 @@ public class App {
 	    System.out.println("Bien enregistrer");
 	    return newBook;
 	    
-	}
+	}*/
 	
 	/**
 	 * Update a existing book
@@ -171,7 +174,7 @@ public class App {
 	 * @return 
 	 *
 	 */
-	public static List<Book> updateBook(List<Book> listOfBook) {
+	/*public static List<Book> updateBook(List<Book> listOfBook) {
 
 		System.out.println("Liste des livres disponible : ");
 		
@@ -203,7 +206,7 @@ public class App {
 		}
 		
 		return listOfBook;
-    }
+    }*/
 	
 	
 	/**
@@ -212,7 +215,7 @@ public class App {
 	 * @author Marie
 	 *
 	 */
-	public static void search() {
+	/*public static void search() {
 		
 		try {
 			List<Book> listOfBook = new ArrayList<Book>();
@@ -233,8 +236,8 @@ public class App {
 				String title = bookInfo[0];
 				String author = bookInfo[1];
 				String gender = bookInfo[2];
-				String numberOfPages = bookInfo[3];
-				String numberOfCopy = bookInfo[4];
+				int numberOfPages = bookInfo[3];
+				int numberOfCopy = bookInfo[4];
 				
 				listOfBook.add(book);
 				
@@ -253,7 +256,7 @@ public class App {
 			
 		}
 		
-    }
+    }*/
 
 	
 	/**
@@ -344,24 +347,27 @@ public class App {
 	public static void main( String[] args ) throws IOException {
     	
     	int userSelected;
+    	boolean exit=false;
     	
-    	List<Book> listOfBook = getList();
+    	//List<Book> listOfBook = getList();
     	    	
-    	
     	do {
     		userSelected = menuData();
     		switch(userSelected) {
     		case 1:
-    			seeListOfBook(listOfBook);
+    			//seeListOfBook(listOfBook);
+    			System.out.println("cc1");
     			break;
     		case 2:
-    			search();
+    			//search();
+    			System.out.println("cc2");
     			break;
     		case 3:
-    			listOfBook.add(newBook());
+    			//listOfBook.add(newBook());
+    			System.out.println("cc3");
     			break;
     		case 4:
-    			listOfBook = updateBook(listOfBook);
+    			//listOfBook = updateBook(listOfBook);
      			break;
     		case 5:
     			//listOfBook = loaning(listOfBook);
@@ -369,12 +375,15 @@ public class App {
     		case 6:
     			//listOfBook = returnBook(listOfBook);
     			break;
+    		case 7:
+    			exit=true;
+    			break;
     		default:
     			break;
     		}
     	}
-    	while(userSelected > 6);
-    	saveListOfBook(listOfBook);
+    	while(!exit);
+    	//saveListOfBook(listOfBook);
     }
 
 	
