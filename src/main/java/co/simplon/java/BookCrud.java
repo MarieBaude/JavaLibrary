@@ -40,9 +40,11 @@ public class BookCrud {
     	}
     }
     
-    public static void getOneBook(int idbook) {
-    	
-    	GetInfo.getId();
+    public static void getOneBook() {
+    	Scanner scId = new Scanner(System.in);
+	    System.out.print("Saisir l'id : ");
+	    int userDataId = scId.nextInt();
+	    userDataId = userDataId;
     	
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
@@ -50,7 +52,7 @@ public class BookCrud {
     	
     	// Issue the query and get a matching Customer
     	TypedQuery<Book> tq = em.createQuery(query, Book.class);
-    	tq.setParameter("idbook", userSearchId);
+    	tq.setParameter("idbook", userDataId);
     	
     	Book cust = null;
     	try {

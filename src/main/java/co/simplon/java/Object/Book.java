@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Book {
 	
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	@Column(name = "idbook", unique = true)
 	private int idbook;
 	
@@ -77,8 +77,6 @@ public class Book {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
-
 
 
 	/**
