@@ -1,18 +1,18 @@
-package com.jcg.hibernate.maven;
+package co.simplon.java;
 
-import java.util.Date;
- 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "book")
 public class Book {
-
+	
 	@Id
-    @Column(name = "idbook", unique = true)
+	@GeneratedValue
+	@Column(name = "idbook", unique = true)
 	private int idbook;
 	
 	@Column(name = "title", nullable = false)
@@ -21,31 +21,15 @@ public class Book {
 	@Column(name = "author", nullable = false)
 	private String author;
 	
-	@Column(name = "gender")
-	private String gender;
+	@Column(name = "genre")
+	private String genre;
 	
 	@Column(name = "nbpage", nullable = false)
-	private int numberOfPages;
+	private String numberOfPages;
 	
 	@Column(name = "nbex")
-	private int numberOfCopy;
+	private String numberOfCopy;
 	
-
-	/**
-	 * @return the idbook
-	 */
-	public int getIdbook() {
-		return idbook;
-	}
-
-
-	/**
-	 * @param idbook the idbook to set
-	 */
-	public void setIdbook(int idbook) {
-		this.idbook = idbook;
-	}
-
 
 	/**
 	 * @return the title
@@ -82,23 +66,23 @@ public class Book {
 	/**
 	 * @return the gender
 	 */
-	public String getGender() {
-		return gender;
+	public String getGenre() {
+		return genre;
 	}
 
 
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 
 	/**
 	 * @return the numberOfPages
 	 */
-	public int getNumberOfPages() {
+	public String getNumberOfPages() {
 		return numberOfPages;
 	}
 
@@ -106,7 +90,7 @@ public class Book {
 	/**
 	 * @param numberOfPages the numberOfPages to set
 	 */
-	public void setNumberOfPages(int numberOfPages) {
+	public void setNumberOfPages(String numberOfPages) {
 		this.numberOfPages = numberOfPages;
 	}
 
@@ -114,7 +98,7 @@ public class Book {
 	/**
 	 * @return the numberOfCopy
 	 */
-	public int getNumberOfCopy() {
+	public String getNumberOfCopy() {
 		return numberOfCopy;
 	}
 
@@ -122,25 +106,15 @@ public class Book {
 	/**
 	 * @param numberOfCopy the numberOfCopy to set
 	 */
-	public void setNumberOfCopy(int numberOfCopy) {
+	public void setNumberOfCopy(String numberOfCopy) {
 		this.numberOfCopy = numberOfCopy;
 	}
-	
-	
-	/**
-	 * Constructor of book
-	 * 
-	 * @param title
-	 * @param author
-	 * @param gender
-	 * @param numberOfPages
-	 * @param numberOfCopy
-	 * 
-	 */
-	Book (String title, String author, String gender, int numberOfPages, int numberOfCopy) {
+
+
+	Book (String title, String author, String genre, String numberOfPages, String numberOfCopy) {
 		this.title = title;
 		this.author = author;
-		this.gender = gender;
+		this.genre = genre;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
 	}
@@ -153,11 +127,11 @@ public class Book {
 		StringBuilder result = new StringBuilder();
 		result.append("Titre : ").append(this.getTitle()).append("\n");
 		result.append("Auteur : ").append(this.getAuthor()).append("\n");
-		result.append("Genre : ").append(this.getGender()).append("\n");
+		result.append("Genre : ").append(this.getGenre()).append("\n");
 		result.append("Nombre de pages : ").append(this.getNumberOfPages()).append("\n");
 		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
 		return result;
 	}
-	
+
 
 }

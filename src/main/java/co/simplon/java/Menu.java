@@ -1,4 +1,4 @@
-package com.simplon.java;
+package co.simplon.java;
 
 import java.io.IOException;
 import java.util.Scanner;
