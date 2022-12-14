@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Book {
 	
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	@Column(name = "idbook", unique = true)
 	private int idbook;
 	
@@ -25,10 +25,10 @@ public class Book {
 	private String genre;
 	
 	@Column(name = "nbpage", nullable = false)
-	private String numberOfPages;
+	private int nbpage;
 	
 	@Column(name = "nbex")
-	private String numberOfCopy;
+	private int nbex;
 	
 
 	/**
@@ -79,44 +79,62 @@ public class Book {
 	}
 
 
+
+
 	/**
-	 * @return the numberOfPages
+	 * @return the idbook
 	 */
-	public String getNumberOfPages() {
-		return numberOfPages;
+	public int getIdbook() {
+		return idbook;
 	}
 
 
 	/**
-	 * @param numberOfPages the numberOfPages to set
+	 * @param idbook the idbook to set
 	 */
-	public void setNumberOfPages(String numberOfPages) {
-		this.numberOfPages = numberOfPages;
+	public void setIdbook(int idbook) {
+		this.idbook = idbook;
 	}
 
 
 	/**
-	 * @return the numberOfCopy
+	 * @return the nbpage
 	 */
-	public String getNumberOfCopy() {
-		return numberOfCopy;
+	public int getNbpage() {
+		return nbpage;
 	}
 
 
 	/**
-	 * @param numberOfCopy the numberOfCopy to set
+	 * @param nbpage the nbpage to set
 	 */
-	public void setNumberOfCopy(String numberOfCopy) {
-		this.numberOfCopy = numberOfCopy;
+	public void setNbpage(int nbpage) {
+		this.nbpage = nbpage;
 	}
 
 
-	Book (String title, String author, String genre, String numberOfPages, String numberOfCopy) {
+	/**
+	 * @return the nbex
+	 */
+	public int getNbex() {
+		return nbex;
+	}
+
+
+	/**
+	 * @param nbex the nbex to set
+	 */
+	public void setNbex(int nbex) {
+		this.nbex = nbex;
+	}
+
+
+	Book (String title, String author, String genre, int nbpage, int nbex) {
 		this.title = title;
 		this.author = author;
 		this.genre = genre;
-		this.numberOfPages = numberOfPages;
-		this.numberOfCopy = numberOfCopy;
+		this.nbpage = nbpage;
+		this.nbex = nbex;
 	}
 	
 	Book () {
@@ -128,8 +146,8 @@ public class Book {
 		result.append("Titre : ").append(this.getTitle()).append("\n");
 		result.append("Auteur : ").append(this.getAuthor()).append("\n");
 		result.append("Genre : ").append(this.getGenre()).append("\n");
-		result.append("Nombre de pages : ").append(this.getNumberOfPages()).append("\n");
-		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
+		result.append("Nombre de pages : ").append(this.getNbpage()).append("\n");
+		result.append("Nombre de copies : ").append(this.getNbex()).append("\n");
 		return result;
 	}
 
