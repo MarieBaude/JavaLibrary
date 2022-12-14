@@ -22,7 +22,8 @@
             <property name="javax.persistence.jdbc.user" value="lib" />
             <!-- Password -->
             <property name="javax.persistence.jdbc.password" value="azerty" />
-            
+            <property name = "hibernate.show_sql" value = "false" />
+            <property name = "hibernate.format_sql" value = "false" />
         </properties>
     </persistence-unit>
 </persistence>

@@ -50,13 +50,13 @@ public class BookCrud {
     	
     	// Issue the query and get a matching Customer
     	TypedQuery<Book> tq = em.createQuery(query, Book.class);
-    	tq.setParameter("idbook", userSearchid);
+    	tq.setParameter("idbook", userSearchId);
     	
     	Book cust = null;
     	try {
     		// Get matching customer object and output
     		cust = tq.getSingleResult();
-    		System.out.println(cust.getTitle() + " " + cust.getAuthor());
+    		System.out.println(cust.getTitle() + ", " + cust.getAuthor());
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();

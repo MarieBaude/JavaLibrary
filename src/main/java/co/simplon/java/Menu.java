@@ -39,7 +39,7 @@ public class Menu {
     			BookCrud.getBooks();
     			break;
     		case 2:
-    			BookCrud.getOneBook();
+    			BookCrud.getOneBook(1);
     			break;
     		case 3:
     			BookCrud.addBook(3, "cthulhu", "lovecraft", "horreur", 432, 4);
