@@ -40,19 +40,19 @@ public class BookCrud {
     	}
     }
     
-    public static void getOneBook() {
+    public static void search() {
     	Scanner scId = new Scanner(System.in);
-	    System.out.print("Saisir l'id : ");
-	    int userDataId = scId.nextInt();
-	    userDataId = userDataId;
+	    System.out.print("Saisir votre recherche : ");
+	    String userDataTitle = scId.nextLine();
+	    userDataTitle = userDataTitle;
     	
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
-    	String query = "SELECT c FROM Book c WHERE c.idbook = :idbook";
+    	String query = "SELECT c FROM Book c LIKE c.title = title";
     	
     	// Issue the query and get a matching Customer
     	TypedQuery<Book> tq = em.createQuery(query, Book.class);
-    	tq.setParameter("idbook", userDataId);
+    	tq.setParameter("title", userDataTitle);
     	
     	Book cust = null;
     	try {

@@ -39,7 +39,7 @@ public class Menu {
     			BookCrud.getBooks();
     			break;
     		case 2:
-    			BookCrud.getOneBook();
+    			BookCrud.search();
     			break;
     		case 3:
     			BookCrud.addBook();
