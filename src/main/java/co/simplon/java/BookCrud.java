@@ -48,7 +48,7 @@ public class BookCrud {
     	
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
-    	String query = "SELECT c FROM Book c LIKE c.title = title";
+    	String query = "SELECT c FROM Book c LIKE c.title = %title%";
     	
     	// Issue the query and get a matching Customer
     	TypedQuery<Book> tq = em.createQuery(query, Book.class);
