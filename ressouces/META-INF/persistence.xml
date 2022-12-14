@@ -9,7 +9,7 @@
     <!-- Define a name used to get an entity manager. Define that you will 
     complete transactions with the DB  -->
     <persistence-unit name="JEETut3" transaction-type="RESOURCE_LOCAL">
-    
+    	
         <!-- Define the class for Hibernate which implements JPA -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- Define the object that should be persisted in the database -->
@@ -22,6 +22,7 @@
             <property name="javax.persistence.jdbc.user" value="lib" />
             <!-- Password -->
             <property name="javax.persistence.jdbc.password" value="azerty" />
+            
         </properties>
     </persistence-unit>
 </persistence>

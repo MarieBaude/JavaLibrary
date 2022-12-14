@@ -1,4 +1,4 @@
-package co.simplon.java;
+package co.simplon.java.Object;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Book {
 	
 	@Id
-	//@GeneratedValue
+	@GeneratedValue
 	@Column(name = "idbook", unique = true)
 	private int idbook;
 	
@@ -137,7 +137,7 @@ public class Book {
 		this.nbex = nbex;
 	}
 	
-	Book () {
+	public Book () {
 		
 	}
 	
