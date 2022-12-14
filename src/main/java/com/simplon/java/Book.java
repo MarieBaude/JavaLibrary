@@ -1,13 +1,30 @@
 package com.simplon.java;
 
-public class Book {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "book")
+public class Book {
+	
+	@Column(name = "idbook", unique = true)
+	private int idbook;
+	
+	@Column(name = "title", nullable = false)
 	private String title;
+	
+	@Column(name = "author", nullable = false)
 	private String author;
-	private String gender;
+	
+	@Column(name = "genre")
+	private String genre;
+	
+	@Column(name = "numberOfPages", nullable = false)
 	private String numberOfPages;
+	
+	@Column(name = "numberOfCopy")
 	private String numberOfCopy;
-	private String status;
 	
 
 	/**
@@ -45,16 +62,16 @@ public class Book {
 	/**
 	 * @return the gender
 	 */
-	public String getGender() {
-		return gender;
+	public String getGenre() {
+		return genre;
 	}
 
 
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 
@@ -88,29 +105,12 @@ public class Book {
 	public void setNumberOfCopy(String numberOfCopy) {
 		this.numberOfCopy = numberOfCopy;
 	}
-	
-	
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
 
 
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-
-	Book (String title, String author, String gender, String numberOfPages, String numberOfCopy) {
+	Book (String title, String author, String genre, String numberOfPages, String numberOfCopy) {
 		this.title = title;
 		this.author = author;
-		this.gender = gender;
+		this.genre = genre;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
 	}
@@ -123,16 +123,10 @@ public class Book {
 		StringBuilder result = new StringBuilder();
 		result.append("Titre : ").append(this.getTitle()).append("\n");
 		result.append("Auteur : ").append(this.getAuthor()).append("\n");
-		result.append("Genre : ").append(this.getGender()).append("\n");
+		result.append("Genre : ").append(this.getGenre()).append("\n");
 		result.append("Nombre de pages : ").append(this.getNumberOfPages()).append("\n");
 		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
 		return result;
-	}
-	
-	public StringBuilder justTitle() {
-		StringBuilder res = new StringBuilder();
-		res.append(this.getTitle()).append("\n");
-		return res;
 	}
 
 
