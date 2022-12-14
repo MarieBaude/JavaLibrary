@@ -61,5 +61,9 @@ public class Client {
 		this.firstname = firstname;
 	}
 	
-	
+	Client (int iduser, String lastname, String firstname) {
+		this.iduser = iduser;
+		this.lastname = lastname;
+		this.firstname = firstname;
+	}
 }
