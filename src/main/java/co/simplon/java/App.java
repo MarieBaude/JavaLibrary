@@ -123,11 +123,42 @@ public class App {
         }
     }
     
+    public static void updateBook(int idbook, String title) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+        
+    	Book cust = null;
+
+        try {
+            // Get transaction and start
+            et = em.getTransaction();
+            et.begin();
+
+            // Find customer and make changes
+            cust = em.find(Book.class, idbook);
+            cust.setTitle(title);
+
+            // Save the customer object
+            em.persist(cust);
+            et.commit();
+        } catch (Exception ex) {
+            // If there is an exception rollback changes
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            // Close EntityManager
+            em.close();
+        }
+    }
+    
     public static void main( String[] args ) throws IOException {
 		//getCustomers();
 		//getOneBook(1);
 		//addBook(3, "cthulhu", "lovecraft", "horreur", 432, 4);
-    	deleteBook(2);
+    	//updateBook(1, "N'oublie jamais");
+    	//deleteBook(2);
 		ENTITY_MANAGER_FACTORY.close();
     	
     }
