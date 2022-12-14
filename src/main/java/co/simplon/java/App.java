@@ -65,7 +65,7 @@ public class App {
     	}
     }
 	
-    public static void addCustomer(int idbook, String title, String author, String genre, int nbpage, int nbex) {
+    public static void addBook(int idbook, String title, String author, String genre, int nbpage, int nbex) {
         // The EntityManager class allows operations such as create, read, update, delete
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         // Used to issue transactions on the EntityManager
@@ -100,10 +100,34 @@ public class App {
         }
     }
 	
-	public static void main( String[] args ) throws IOException {
+    public static void deleteBook(int idbook) {
+    	EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction et = null;
+        Book cust = null;
+
+        try {
+            et = em.getTransaction();
+            et.begin();
+            cust = em.find(Book.class, idbook);
+            em.remove(cust);
+            et.commit();
+        } catch (Exception ex) {
+            // If there is an exception rollback changes
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            // Close EntityManager
+            em.close();
+        }
+    }
+    
+    public static void main( String[] args ) throws IOException {
 		//getCustomers();
 		//getOneBook(1);
-		addCustomer(3, "cthulhu", "lovecraft", "horreur", 432, 4);
+		//addBook(3, "cthulhu", "lovecraft", "horreur", 432, 4);
+    	deleteBook(2);
 		ENTITY_MANAGER_FACTORY.close();
     	
     }
