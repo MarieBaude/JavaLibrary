@@ -68,8 +68,49 @@ public class BookCrud {
     	}
     }
 	
-    public static void addBook(int idbook, String title, String author, String genre, int nbpage, int nbex) {
-        // The EntityManager class allows operations such as create, read, update, delete
+    public static void addBook() {
+    	
+        	Scanner scId = new Scanner(System.in);
+    	    System.out.print("Saisir l'id : ");
+    	    int userDataId = scId.nextInt();
+    	    userDataId = userDataId;
+    	
+    	
+        	Scanner scTitle = new Scanner(System.in);
+    	    System.out.print("Saisir le titre : ");
+    	    String userDataTitle = scTitle.nextLine();
+    	    userDataTitle = userDataTitle;
+    	
+    	
+    
+        	Scanner scAuthor = new Scanner(System.in);
+    	    System.out.print("Saisir l'auteur : ");
+    	    String userDataAuthor = scAuthor.nextLine();
+    	    userDataAuthor = userDataAuthor;
+    	
+    	
+    	
+        	Scanner scGenre = new Scanner(System.in);
+    	    System.out.print("Saisir le genre : ");
+    	    String userDataGenre = scGenre.nextLine();
+    	    userDataGenre = userDataGenre;
+    	
+    	
+    	
+        	Scanner scNbPage = new Scanner(System.in);
+    	    System.out.print("Saisir le nombre de page : ");
+    	    int userDataNbPage = scNbPage.nextInt();
+    	    userDataNbPage = userDataNbPage;
+    	
+    	
+    	
+        	Scanner scNbEx = new Scanner(System.in);
+    	    System.out.print("Saisir le nombre d'exemplaire : ");
+    	    int userDataNbEx = scNbEx.nextInt();
+    	    userDataNbEx = userDataNbEx;
+    	
+    	
+    	// The EntityManager class allows operations such as create, read, update, delete
         EntityManager em = getEntityManagerFactory().createEntityManager();
         // Used to issue transactions on the EntityManager
         EntityTransaction et = null;
@@ -81,12 +122,12 @@ public class BookCrud {
 
             // Create and set values for new customer
             Book cust = new Book();
-            cust.setIdbook(idbook);
-            cust.setTitle(title);
-            cust.setAuthor(author);
-            cust.setGenre(genre);
-            cust.setNbpage(nbpage);
-            cust.setNbex(nbex);
+            cust.setIdbook(userDataId);
+            cust.setTitle(userDataTitle);
+            cust.setAuthor(userDataAuthor);
+            cust.setGenre(userDataGenre);
+            cust.setNbpage(userDataNbPage);
+            cust.setNbex(userDataNbEx);
 
             // Save the customer object
             em.persist(cust);
@@ -102,30 +143,7 @@ public class BookCrud {
             em.close();
         }
     }
-	
-    public static void deleteBook(int idbook) {
-    	EntityManager em = getEntityManagerFactory().createEntityManager();
-        EntityTransaction et = null;
-        Book cust = null;
-
-        try {
-            et = em.getTransaction();
-            et.begin();
-            cust = em.find(Book.class, idbook);
-            em.remove(cust);
-            et.commit();
-        } catch (Exception ex) {
-            // If there is an exception rollback changes
-            if (et != null) {
-                et.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            // Close EntityManager
-            em.close();
-        }
-    }
-    
+	    
     public static void updateBook(int idbook, String title) {
         EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
@@ -143,6 +161,29 @@ public class BookCrud {
 
             // Save the customer object
             em.persist(cust);
+            et.commit();
+        } catch (Exception ex) {
+            // If there is an exception rollback changes
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            // Close EntityManager
+            em.close();
+        }
+    }
+    
+    public static void deleteBook(int idbook) {
+    	EntityManager em = getEntityManagerFactory().createEntityManager();
+        EntityTransaction et = null;
+        Book cust = null;
+
+        try {
+            et = em.getTransaction();
+            et.begin();
+            cust = em.find(Book.class, idbook);
+            em.remove(cust);
             et.commit();
         } catch (Exception ex) {
             // If there is an exception rollback changes

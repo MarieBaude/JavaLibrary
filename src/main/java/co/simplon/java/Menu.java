@@ -42,13 +42,13 @@ public class Menu {
     			BookCrud.getOneBook();
     			break;
     		case 3:
-    			BookCrud.addBook(3, "cthulhu", "lovecraft", "horreur", 432, 4);
+    			BookCrud.addBook();
     			break;
     		case 4:
-    			BookCrud.updateBook(1, "N'oublie jamais");
+    			//BookCrud.updateBook();
      			break;
     		case 5:
-    			BookCrud.deleteBook(2);
+    			//BookCrud.deleteBook();
      			break;     			
     		case 6:
     			// réserver un livre
