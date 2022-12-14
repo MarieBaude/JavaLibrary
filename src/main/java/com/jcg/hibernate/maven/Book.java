@@ -12,19 +12,19 @@ import javax.persistence.Table;
 public class Book {
 
 	@Id
-    @Column(name = "idbook")
+    @Column(name = "idbook", unique = true)
 	private int idbook;
 	
-	@Column(name = "title")
+	@Column(name = "title", nullable = false)
 	private String title;
 	
-	@Column(name = "author")
+	@Column(name = "author", nullable = false)
 	private String author;
 	
 	@Column(name = "gender")
 	private String gender;
 	
-	@Column(name = "nbpage")
+	@Column(name = "nbpage", nullable = false)
 	private int numberOfPages;
 	
 	@Column(name = "nbex")
@@ -125,8 +125,18 @@ public class Book {
 	public void setNumberOfCopy(int numberOfCopy) {
 		this.numberOfCopy = numberOfCopy;
 	}
-
-
+	
+	
+	/**
+	 * Constructor of book
+	 * 
+	 * @param title
+	 * @param author
+	 * @param gender
+	 * @param numberOfPages
+	 * @param numberOfCopy
+	 * 
+	 */
 	Book (String title, String author, String gender, int numberOfPages, int numberOfCopy) {
 		this.title = title;
 		this.author = author;

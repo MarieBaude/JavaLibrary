@@ -356,15 +356,12 @@ public class App {
     		switch(userSelected) {
     		case 1:
     			//seeListOfBook(listOfBook);
-    			System.out.println("cc1");
     			break;
     		case 2:
     			//search();
-    			System.out.println("cc2");
     			break;
     		case 3:
     			//listOfBook.add(newBook());
-    			System.out.println("cc3");
     			break;
     		case 4:
     			//listOfBook = updateBook(listOfBook);
