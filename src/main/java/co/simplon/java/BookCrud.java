@@ -144,7 +144,46 @@ public class BookCrud {
         }
     }
 	    
-    public static void updateBook(int idbook, String title) {
+    public static void updateBook() {
+    	Scanner scId = new Scanner(System.in);
+	    System.out.print("Saisir l'id : ");
+	    int userDataId = scId.nextInt();
+	    userDataId = userDataId;
+	
+	
+    	Scanner scTitle = new Scanner(System.in);
+	    System.out.print("Saisir le titre : ");
+	    String userDataTitle = scTitle.nextLine();
+	    userDataTitle = userDataTitle;
+	
+	
+
+    	Scanner scAuthor = new Scanner(System.in);
+	    System.out.print("Saisir l'auteur : ");
+	    String userDataAuthor = scAuthor.nextLine();
+	    userDataAuthor = userDataAuthor;
+	
+	
+	
+    	Scanner scGenre = new Scanner(System.in);
+	    System.out.print("Saisir le genre : ");
+	    String userDataGenre = scGenre.nextLine();
+	    userDataGenre = userDataGenre;
+	
+	
+	
+    	Scanner scNbPage = new Scanner(System.in);
+	    System.out.print("Saisir le nombre de page : ");
+	    int userDataNbPage = scNbPage.nextInt();
+	    userDataNbPage = userDataNbPage;
+	
+	
+	
+    	Scanner scNbEx = new Scanner(System.in);
+	    System.out.print("Saisir le nombre d'exemplaire : ");
+	    int userDataNbEx = scNbEx.nextInt();
+	    userDataNbEx = userDataNbEx;
+	    
         EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
         
@@ -156,8 +195,12 @@ public class BookCrud {
             et.begin();
 
             // Find customer and make changes
-            cust = em.find(Book.class, idbook);
-            cust.setTitle(title);
+            cust = em.find(Book.class, userDataId);
+            cust.setTitle(userDataTitle);
+            cust.setAuthor(userDataAuthor);
+            cust.setGenre(userDataGenre);
+            cust.setNbpage(userDataNbPage);
+            cust.setNbex(userDataNbEx);
 
             // Save the customer object
             em.persist(cust);

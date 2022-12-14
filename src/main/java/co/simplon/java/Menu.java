@@ -45,7 +45,7 @@ public class Menu {
     			BookCrud.addBook();
     			break;
     		case 4:
-    			//BookCrud.updateBook();
+    			BookCrud.updateBook();
      			break;
     		case 5:
     			BookCrud.deleteBook();
