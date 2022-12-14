@@ -5,9 +5,11 @@
 mapped to database tables. Database driver, location, userid and pw
  -->
 
-<persistence version="2.0"
-    xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+    version="2.1">
     
     <!-- Define a name used to get an entity manager. Define that you will 
     complete transactions with the DB  -->
@@ -16,7 +18,7 @@ mapped to database tables. Database driver, location, userid and pw
         <!-- Define the class for Hibernate which implements JPA -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- Define the object that should be persisted in the database -->
-        <class>com.newthinktank.JEETut3.Customer</class>
+        
         <properties>
             <!-- Driver for DB database -->
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

@@ -1,11 +1,12 @@
 package com.jcg.hibernate.maven;
 
 import java.util.Date;
- 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+ 
 
 @Entity
 @Table(name = "book")
@@ -21,8 +22,8 @@ public class Book {
 	@Column(name = "author", nullable = false)
 	private String author;
 	
-	@Column(name = "gender")
-	private String gender;
+	@Column(name = "genre")
+	private String genre;
 	
 	@Column(name = "nbpage", nullable = false)
 	private int numberOfPages;
@@ -82,16 +83,16 @@ public class Book {
 	/**
 	 * @return the gender
 	 */
-	public String getGender() {
-		return gender;
+	public String getGenre() {
+		return genre;
 	}
 
 
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setGenre(String gender) {
+		this.genre = gender;
 	}
 
 
@@ -137,10 +138,10 @@ public class Book {
 	 * @param numberOfCopy
 	 * 
 	 */
-	Book (String title, String author, String gender, int numberOfPages, int numberOfCopy) {
+	Book (String title, String author, String genre, int numberOfPages, int numberOfCopy) {
 		this.title = title;
 		this.author = author;
-		this.gender = gender;
+		this.genre = genre;
 		this.numberOfPages = numberOfPages;
 		this.numberOfCopy = numberOfCopy;
 	}
@@ -153,7 +154,7 @@ public class Book {
 		StringBuilder result = new StringBuilder();
 		result.append("Titre : ").append(this.getTitle()).append("\n");
 		result.append("Auteur : ").append(this.getAuthor()).append("\n");
-		result.append("Genre : ").append(this.getGender()).append("\n");
+		result.append("Genre : ").append(this.getGenre()).append("\n");
 		result.append("Nombre de pages : ").append(this.getNumberOfPages()).append("\n");
 		result.append("Nombre de copies : ").append(this.getNumberOfCopy()).append("\n");
 		return result;
