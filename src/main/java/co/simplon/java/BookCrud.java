@@ -174,7 +174,12 @@ public class BookCrud {
         }
     }
     
-    public static void deleteBook(int idbook) {
+    public static void deleteBook() {
+    	Scanner scId = new Scanner(System.in);
+	    System.out.print("Saisir l'id : ");
+	    int userDataId = scId.nextInt();
+	    userDataId = userDataId;
+	    
     	EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
         Book cust = null;
@@ -182,7 +187,7 @@ public class BookCrud {
         try {
             et = em.getTransaction();
             et.begin();
-            cust = em.find(Book.class, idbook);
+            cust = em.find(Book.class, userDataId);
             em.remove(cust);
             et.commit();
         } catch (Exception ex) {

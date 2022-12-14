@@ -48,7 +48,7 @@ public class Menu {
     			//BookCrud.updateBook();
      			break;
     		case 5:
-    			//BookCrud.deleteBook();
+    			BookCrud.deleteBook();
      			break;     			
     		case 6:
     			// réserver un livre
