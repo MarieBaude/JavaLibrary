@@ -38,31 +38,7 @@ public class Reservation {
 	    System.out.print("Mot de passe : ");
 	    String clientPw = sc.nextLine();
 	    
-	    EntityManager em = getEntityManagerFactory().createEntityManager();
-        EntityTransaction et = null;
-        
-        Client cust = null;
-        
-        try {
-            // Get transaction and start
-            et = em.getTransaction();
-            et.begin();
-
-            // Find customer and make changes
-            cust = em.find(Client.class, clientIdentifier);
-            cust.getIdentifier();
-            cust.getPassword();
-            
-
-            if (clientIdentifier.equals(clientIdentifier)) {
-				System.out.println("Connexion réussi");
-			} else {
-				System.out.println("Vous n'êtes pas enregistrer");
-			}
-        } finally {
-            // Close EntityManager
-            em.close();
-        }
+	   
 	    
 	}
 	
