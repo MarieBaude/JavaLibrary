@@ -28,6 +28,12 @@ public class Menu {
 		return selection;
 	}
 	
+	/**
+	 * Menu with all action possible by the programme
+	 * 
+	 * @author Marie
+	 *
+	 */
 	public static void menu(){	
     	int userSelected;
     	boolean exit = false;  	
@@ -51,10 +57,10 @@ public class Menu {
     			BookCrud.deleteBook();
      			break;     			
     		case 6:
-    			// réserver un livre
+    			Reservation.borrowBook();
     			break;
     		case 7:
-    			// rendre un livre
+    			Reservation.renderBook();
     			break;
     		case 8:
     			BookCrud.getEntityManagerFactory().close();	
