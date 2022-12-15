@@ -40,19 +40,19 @@ public class BookCrud {
     	}
     }
     
+    // a debug
     public static void search() {
     	Scanner scId = new Scanner(System.in);
 	    System.out.print("Saisir votre recherche : ");
-	    String userDataTitle = scId.nextLine();
-	    userDataTitle = userDataTitle;
+	    String userSearch = scId.next();
     	
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
-    	String query = "SELECT c FROM Book c LIKE c.title = %title%";
+    	String query = "SELECT c FROM Book c WHERE c.title = :title LIKE :userSearch";
     	
     	// Issue the query and get a matching Customer
     	TypedQuery<Book> tq = em.createQuery(query, Book.class);
-    	tq.setParameter("title", userDataTitle);
+    	tq.setParameter("idbook", "%" + userSearch + "%");
     	
     	Book cust = null;
     	try {
@@ -221,7 +221,6 @@ public class BookCrud {
     	Scanner scId = new Scanner(System.in);
 	    System.out.print("Saisir l'id : ");
 	    int userDataId = scId.nextInt();
-	    userDataId = userDataId;
 	    
     	EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
