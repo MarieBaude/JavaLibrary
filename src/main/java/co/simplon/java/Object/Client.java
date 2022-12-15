@@ -95,8 +95,10 @@ public class Client {
 		this.password = password;
 	}
 
-	Client (int iduser, String lastname, String firstname) {
+	Client (int iduser, String identifier, String password, String lastname, String firstname) {
 		this.iduser = iduser;
+		this.identifier = identifier;
+		this.password = password;
 		this.lastname = lastname;
 		this.firstname = firstname;
 	}
