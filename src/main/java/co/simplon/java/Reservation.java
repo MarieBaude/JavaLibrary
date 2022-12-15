@@ -52,6 +52,7 @@ public class Reservation {
             cust = em.find(Client.class, clientIdentifier);
             cust.getIdentifier();
             cust.getPassword();
+            
 
             if (clientIdentifier.equals(clientIdentifier)) {
 				System.out.println("Connexion réussi");
