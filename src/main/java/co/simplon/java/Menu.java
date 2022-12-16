@@ -12,18 +12,21 @@ public class Menu {
 	private static int menuData() {
 		int selection;
 		Scanner scMenu = new Scanner (System.in);
-		System.out.println("Selectionner votre option : ");
-		System.out.println("1) Listes des livres");
-		System.out.println("2) Rechercher un livre");
-		
-		System.out.println("3) Enregistrer un nouveau livre");
-		System.out.println("4) Modifier un livre");
-		System.out.println("5) Supprimer un livre");
-		
-		System.out.println("6) Emprunter un livre");
-		System.out.println("7) Rendre un livre");
-		
-		System.out.println("8) Quitter le programme");
+		System.out.println("______________________________________");
+		System.out.println("|                                    |");
+		System.out.println("|Selectionnez votre option :         |");
+		System.out.println("|1) Listes des livres                |");
+		System.out.println("|2) Rechercher un livre              |");
+		System.out.println("|3) Enregistrer un nouveau livre     |");
+		System.out.println("|4) Modifier un livre                |");
+		System.out.println("|5) Supprimer un livre               |");
+		System.out.println("|------------------------------------|");
+		System.out.println("|Section réservation :               |");
+		System.out.println("|6) Emprunter un livre               |");
+		System.out.println("|7) Rendre un livre                  |");
+		System.out.println("|------------------------------------|");
+		System.out.println("|8) Quitter le programme             |");
+		System.out.println("|____________________________________|");
 		selection = scMenu.nextInt();
 		return selection;
 	}
@@ -64,7 +67,9 @@ public class Menu {
     			break;
     		case 8:
     			BookCrud.getEntityManagerFactory().close();	
-    			System.out.println("Programme fermé");
+    			System.out.println("_____________________");
+    			System.out.println("|Programme fermé    |");
+    			System.out.println("|____________________|");
     			exit = true;
     			break;
     		default:

@@ -44,7 +44,10 @@ public class BookCrud {
     	try {
     		// Get matching customer object and output
     		custs = tq.getResultList();
-    		custs.forEach(cust->System.out.println(cust.getTitle() + ", " + cust.getAuthor() + ", " + cust.getGenre()));
+    		System.out.println("|____________________________________|");
+    		custs.forEach(cust->
+    		System.out.println(cust.getTitle() + ", " + cust.getAuthor() + ", " + cust.getGenre()));
+    		System.out.println("|____________________________________|");
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();
@@ -65,17 +68,19 @@ public class BookCrud {
     	
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
-    	String query = "SELECT c FROM Book c WHERE c.title = :title";
+    	String query = "SELECT c FROM Book c WHERE c.title LIKE :title";
     	
     	// Issue the query and get a matching Customer
     	TypedQuery<Book> tq = em.createQuery(query, Book.class);
-    	tq.setParameter("title", userSearch);
+    	tq.setParameter("title", "%" + userSearch + "%");
     	
     	Book cust = null;
     	try {
     		// Get matching customer object and output
     		cust = tq.getSingleResult();
+    		System.out.println("_________________________________________________________");
     		System.out.println(cust.getTitle() + ", " + cust.getAuthor());
+    		System.out.println("_________________________________________________________");
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();
