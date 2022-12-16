@@ -17,6 +17,20 @@ public class BookCrud {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("JEETut3");
     
+    /**
+	<ul>
+	    <li>getBooks is a public static method that retrieves a list of books from a database and prints their title, author, and genre to the console.</li>
+	    <li>The method first creates an EntityManager object using the getEntityManagerFactory method.</li>
+	    <li>It then defines a query to select all books from the Book object and stores the query in a String object.</li>
+	    <li>The method then creates a TypedQuery object using the EntityManager object and the query String, specifying the Book class as the result type.</li>
+	    <li>The method then attempts to retrieve the result list of the query and store it in a List object.</li>
+	    <li>It then iterates through the List and prints the title, author, and genre of each Book object to the console.</li>
+	    <li>If an exception is thrown, the method prints the stack trace.</li>
+	    <li>Finally, the method closes the EntityManager and getEntityManagerFactory objects.</li>
+    </ul>
+    @author mariebaude
+    */
+    
     public static void getBooks() {
     	EntityManager em = getEntityManagerFactory().createEntityManager();
     	
@@ -38,6 +52,8 @@ public class BookCrud {
     	finally {
     		em.close();
     	}
+    	
+    	getEntityManagerFactory().close();
     }
     
     //TODO

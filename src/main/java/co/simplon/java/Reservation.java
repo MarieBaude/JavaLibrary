@@ -1,11 +1,17 @@
 package co.simplon.java;
 
+import java.util.List;
 import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import co.simplon.java.Object.Book;
 import co.simplon.java.Object.Client;
@@ -31,14 +37,27 @@ public class Reservation {
             .createEntityManagerFactory("JEETut3");
 	
 	public static void checkClient() {
-		Scanner sc = new Scanner(System.in);
-	    System.out.print("Identifiant : ");
-	    String clientIdentifier = sc.nextLine();
-	    
-	    System.out.print("Mot de passe : ");
-	    String clientPw = sc.nextLine();
-	    
-	   
+	    // Create a session object to interact with the database
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		System.out.println("Session: " + session);
+
+
+	    // Use the session object to create a query to retrieve the data from the database
+	    List<Client> entities = session.createQuery("FROM client", Client.class).list();
+
+	    // Use a Scanner object to read the data from the input source
+	    Scanner scanner = new Scanner(System.in);
+
+	    // Iterate through the list of entities and compare the data in the scanner with the data in the database
+	    for (Client entity : entities) {
+	        String value = scanner.next();
+
+	        if (value.equals(entity.getIdentifier())) {
+	            System.out.println("Connexion réussi");
+	        } else {
+	        	System.out.println("Vous n'êtes pas membre");
+	        }
+	    }
 	    
 	}
 	
@@ -50,11 +69,6 @@ public class Reservation {
 	
 	public static void renderBook() {
 		checkClient();
-	}
-	
-	private static EntityManagerFactory getEntityManagerFactory() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
