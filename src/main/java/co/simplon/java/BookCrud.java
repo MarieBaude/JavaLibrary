@@ -60,16 +60,16 @@ public class BookCrud {
     // - debug
     public static void search() {
     	Scanner scId = new Scanner(System.in);
-	    System.out.print("Saisir votre recherche : ");
+	    System.out.print("Saisir un nom exacte : ");
 	    String userSearch = scId.next();
     	
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
-    	String query = "SELECT c FROM Book c WHERE c.title = :title LIKE :userSearch";
+    	String query = "SELECT c FROM Book c WHERE c.title = :title";
     	
     	// Issue the query and get a matching Customer
     	TypedQuery<Book> tq = em.createQuery(query, Book.class);
-    	tq.setParameter("idbook", "%" + userSearch + "%");
+    	tq.setParameter("title", userSearch);
     	
     	Book cust = null;
     	try {
