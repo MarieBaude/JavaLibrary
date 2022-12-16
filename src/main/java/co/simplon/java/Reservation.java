@@ -39,7 +39,7 @@ public class Reservation {
 	public static void checkClient() {
 	    // Create a session object to interact with the database
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		System.out.println("Session: " + session);
+		Session session = sessionFactory.openSession();
 
 
 	    // Use the session object to create a query to retrieve the data from the database
