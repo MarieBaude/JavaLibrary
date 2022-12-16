@@ -19,7 +19,7 @@ import co.simplon.java.Object.Client;
 // TODO réservé
 // - confirmer l'identitéé de la bdd
 // - demander le nom du livre
-// - vérifier si disponible
+// - vérifier si existant
 // - vérifier si exemplaire encore disponible
 // - faire -1 dans le stock 
 // - créer une entrée dans la table reservation, prendre id du livre, id du client, créer la date
@@ -67,7 +67,6 @@ public class Reservation {
 	}
 	
 	
-
 	public static void borrowBook() {
 		checkClient();
 	    
