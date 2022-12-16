@@ -69,7 +69,7 @@ public class Menu {
     			BookCrud.getEntityManagerFactory().close();	
     			System.out.println("_____________________");
     			System.out.println("|Programme fermé    |");
-    			System.out.println("|____________________|");
+    			System.out.println("|___________________|");
     			exit = true;
     			break;
     		default:

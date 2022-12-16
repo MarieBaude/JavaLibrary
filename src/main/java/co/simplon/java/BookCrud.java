@@ -44,10 +44,10 @@ public class BookCrud {
     	try {
     		// Get matching customer object and output
     		custs = tq.getResultList();
-    		System.out.println("|____________________________________|");
+    		System.out.println("|_________________________________________________________________________________|");
     		custs.forEach(cust->
-    		System.out.println(cust.getTitle() + ", " + cust.getAuthor() + ", " + cust.getGenre()));
-    		System.out.println("|____________________________________|");
+    		System.out.println("| Titre : " + cust.getTitle() + ", Auteur.trice : " + cust.getAuthor() + ", Genre : " + cust.getGenre()));
+    		System.out.println("|_________________________________________________________________________________|");
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();
@@ -59,8 +59,6 @@ public class BookCrud {
     	getEntityManagerFactory().close();
     }
     
-    //TODO
-    // - debug
     public static void search() {
     	Scanner scId = new Scanner(System.in);
 	    System.out.print("Saisir un nom exacte : ");
@@ -78,9 +76,9 @@ public class BookCrud {
     	try {
     		// Get matching customer object and output
     		cust = tq.getSingleResult();
-    		System.out.println("_________________________________________________________");
+    		System.out.println("|____________________________________|");
     		System.out.println(cust.getTitle() + ", " + cust.getAuthor());
-    		System.out.println("_________________________________________________________");
+    		System.out.println("|____________________________________|");
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();
