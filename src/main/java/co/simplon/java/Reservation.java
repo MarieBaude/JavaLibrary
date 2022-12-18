@@ -99,8 +99,6 @@ public class Reservation {
         }
 	}
 	
-	
-	
 	public static void dataReservation(Book book, Client client) {
 		subtractExemplary(book);
 		
