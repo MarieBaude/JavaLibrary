@@ -37,6 +37,14 @@ public class Reservation {
             .createEntityManagerFactory("JEETut3");
 	
 	public static void checkClient() {
+		Scanner sc = new Scanner(System.in);
+	    System.out.print("Saisir l'identifiant : ");
+	    String userIdentifiant = sc.nextLine();
+	    
+	    Scanner sc2 = new Scanner(System.in);
+	    System.out.print("Saisir le mot de passe : ");
+	    String userPw = sc2.nextLine();
+	    
 	    // Create a session object to interact with the database
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();

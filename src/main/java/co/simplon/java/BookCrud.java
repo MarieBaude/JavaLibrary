@@ -60,9 +60,8 @@ public class BookCrud {
     }
     
     public static void search() {
-    	Scanner scId = new Scanner(System.in);
-	    System.out.print("Saisir un nom exacte : ");
-	    String userSearch = scId.next();
+    	//Scanner scId = new Scanner(System.in);
+	    String userSearch = GetInfo.getUserInput("Saisir un nom exacte : ");
     	
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
@@ -134,6 +133,7 @@ public class BookCrud {
         EntityManager em = getEntityManagerFactory().createEntityManager();
         // Used to issue transactions on the EntityManager
         EntityTransaction et = null;
+        
 
         try {
             // Get transaction and start
