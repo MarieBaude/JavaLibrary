@@ -151,4 +151,12 @@ public class Book {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Book [idbook=" + idbook + ", title=" + title + ", author=" + author + ", genre=" + genre + ", nbpage="
+				+ nbpage + ", nbex=" + nbex + "]";
+	}
+
+	
+
 }

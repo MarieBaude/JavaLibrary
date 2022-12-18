@@ -16,17 +16,6 @@ import org.hibernate.SessionFactory;
 import co.simplon.java.Object.Book;
 import co.simplon.java.Object.Client;
 
-// TODO réservé
-// - faire -1 dans le stock 
-// - créer une entrée dans la table reservation, prendre id du livre, id du client, créer la date
-// - du jour, rajouter deux semaine et créer la date de rendu
-// - fournir id de réservation
-
-// TODO rendre
-// - confirmer l'identité de la bdd
-// - demander le code de rendu
-// - changer le status en true
-//-  ajouter 1 au ex du livre
 
 public class Reservation {
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
@@ -90,12 +79,43 @@ public class Reservation {
     	return cust;
     }
 	
+	public static void subtractExemplary() {
+		EntityManager em = getEntityManagerFactory().createEntityManager();
+        EntityTransaction et = null;
+        
+    	Book cust = null;
+
+        try {
+            // Get transaction and start
+            et = em.getTransaction();
+            et.begin();
+
+            // Find customer and make changes
+            cust = em.find(Book.class, userDataId);
+            cust.setTitle(userDataTitle);
+
+            // Save the customer object
+            em.persist(cust);
+            et.commit();
+            System.out.println("Livre bien mis à jour");
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            em.close();
+        }
+	}
+	
+	
+	
 	public static void dataReservation() {
 		// faire - 1 dans le nombre d'emplaire du livre
 		// créer une entré dans la table reservation avec date du jour, date du jour + 15 jours, id user, id book
 		// retourner l'id de réservation
 
-		System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
+		//System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
 	}
 	
 	public static void borrowBook() {
@@ -113,11 +133,19 @@ public class Reservation {
 	    
 	}
 	
+	public static void addExemplary() {
+		
+	}
+	
 	public static void renderBook() {
 		checkClient();
+		
+		// TODO rendre
+		// - confirmer l'identité de la bdd
+		// - demander le code de rendu
+		// - changer le status en true
+		//-  ajouter 1 au ex du livre
 	}
-
-
 
 	
 	public static EntityManagerFactory getEntityManagerFactory() {
