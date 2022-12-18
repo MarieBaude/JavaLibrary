@@ -21,7 +21,7 @@ public class Reservation {
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("JEETut3");
 	
-	public static boolean checkClient() {
+	public static Client checkClient() {
 		GetInfo gi = new GetInfo();
 		
 	    String userIdentifier = gi.getUserText("Saisir votre identifiant : ");
@@ -37,10 +37,8 @@ public class Reservation {
     	Client cust = null;
     	try {
     		cust = tq.getSingleResult();
-    		System.out.println(cust.toString());
     		if (userIdentifier.equals(cust.getIdentifier())) {
                 System.out.println("Connexion réussi");
-                return true;
             } 
     	}
     	catch(NoResultException ex) {
@@ -50,8 +48,7 @@ public class Reservation {
     	finally {
     		em.close();
     	}
-    	return false;
-	    
+	    return cust;
 	}
 	
 	public static Book getBook() {
@@ -79,25 +76,19 @@ public class Reservation {
     	return cust;
     }
 	
-	public static void subtractExemplary() {
+	public static void subtractExemplary(Book book) {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
-        
-    	Book cust = null;
 
         try {
-            // Get transaction and start
             et = em.getTransaction();
             et.begin();
+            
+            Book bookToUpdate = em.find(Book.class, book.getIdbook());
+            bookToUpdate.setNbex(bookToUpdate.getNbex() - 1);
 
-            // Find customer and make changes
-            cust = em.find(Book.class, userDataId);
-            cust.setTitle(userDataTitle);
-
-            // Save the customer object
-            em.persist(cust);
+            em.persist(bookToUpdate);
             et.commit();
-            System.out.println("Livre bien mis à jour");
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();
@@ -110,8 +101,9 @@ public class Reservation {
 	
 	
 	
-	public static void dataReservation() {
-		// faire - 1 dans le nombre d'emplaire du livre
+	public static void dataReservation(Book book, Client client) {
+		subtractExemplary(book);
+		
 		// créer une entré dans la table reservation avec date du jour, date du jour + 15 jours, id user, id book
 		// retourner l'id de réservation
 
@@ -119,32 +111,29 @@ public class Reservation {
 	}
 	
 	public static void borrowBook() {
-		if(checkClient()) {
-			Book a = getBook();
-			
-			if (a != null && a.getNbex() > 0) {
-				dataReservation();
-    		} else if (a != null && a.getNbex() == 0){
-    			System.out.println("Il n'y a pas exemplaire disponible pour le moment");
-    		} else {
-    			System.out.println("Ce livre n'est pas disponible");
-    		}
+		Client user = checkClient();
+		Book bookRequest = getBook();
+		
+		if (bookRequest != null && user != null && bookRequest.getNbex() > 0) {
+			dataReservation(bookRequest, user);
+		} else if (bookRequest != null && user != null && bookRequest.getNbex() == 0){
+			System.out.println("Il n'y a pas exemplaire disponible pour le moment");
+		} else {
+			System.out.println("Ce livre n'est pas disponible");
 		}
 	    
 	}
 	
 	public static void addExemplary() {
-		
+		//-  ajouter 1 au ex du livre
 	}
 	
 	public static void renderBook() {
 		checkClient();
 		
 		// TODO rendre
-		// - confirmer l'identité de la bdd
 		// - demander le code de rendu
-		// - changer le status en true
-		//-  ajouter 1 au ex du livre
+		addExemplary();
 	}
 
 	
