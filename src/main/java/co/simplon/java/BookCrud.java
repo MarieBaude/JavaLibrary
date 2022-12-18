@@ -60,9 +60,10 @@ public class BookCrud {
     }
     
     public static void search() {
-    	//Scanner scId = new Scanner(System.in);
-	    String userSearch = GetInfo.getUserInput("Saisir un nom exacte : ");
-    	
+    	GetInfo gi = new GetInfo();
+	    String userSearch = gi.getUserText("Saisir un nom exacte : ");
+	    gi.closeScanner();
+	    
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
     	String query = "SELECT c FROM Book c WHERE c.title LIKE :title";
@@ -89,46 +90,19 @@ public class BookCrud {
 	
     public static void addBook() {
     	
-        	Scanner scId = new Scanner(System.in);
-    	    System.out.print("Saisir l'id : ");
-    	    int userDataId = scId.nextInt();
-    	    userDataId = userDataId;
+    	GetInfo gi = new GetInfo();
     	
+	    //int userDataId = gi.getUserInt("Saisir l'id : ");
+	
+	    String userDataTitle = gi.getUserText("Saisir le titre : ");
+	    String userDataAuthor = gi.getUserText("Saisir l'auteur : ");
+	    String userDataGenre = gi.getUserText("Saisir le genre : ");
+	
+	    int userDataNbPage = gi.getUserInt("Saisir le nombre de page : ");
+	    int userDataNbEx = gi.getUserInt("Saisir le nombre d'exemplaire : ");
     	
-        	Scanner scTitle = new Scanner(System.in);
-    	    System.out.print("Saisir le titre : ");
-    	    String userDataTitle = scTitle.nextLine();
-    	    userDataTitle = userDataTitle;
-    	
-    	
-    
-        	Scanner scAuthor = new Scanner(System.in);
-    	    System.out.print("Saisir l'auteur : ");
-    	    String userDataAuthor = scAuthor.nextLine();
-    	    userDataAuthor = userDataAuthor;
-    	
-    	
-    	
-        	Scanner scGenre = new Scanner(System.in);
-    	    System.out.print("Saisir le genre : ");
-    	    String userDataGenre = scGenre.nextLine();
-    	    userDataGenre = userDataGenre;
-    	
-    	
-    	
-        	Scanner scNbPage = new Scanner(System.in);
-    	    System.out.print("Saisir le nombre de page : ");
-    	    int userDataNbPage = scNbPage.nextInt();
-    	    userDataNbPage = userDataNbPage;
-    	
-    	
-    	
-        	Scanner scNbEx = new Scanner(System.in);
-    	    System.out.print("Saisir le nombre d'exemplaire : ");
-    	    int userDataNbEx = scNbEx.nextInt();
-    	    userDataNbEx = userDataNbEx;
-    	
-    	
+	    // gi.closeScanner();
+
     	// The EntityManager class allows operations such as create, read, update, delete
         EntityManager em = getEntityManagerFactory().createEntityManager();
         // Used to issue transactions on the EntityManager
@@ -142,7 +116,7 @@ public class BookCrud {
 
             // Create and set values for new customer
             Book cust = new Book();
-            cust.setIdbook(userDataId);
+            //cust.setIdbook(userDataId);
             cust.setTitle(userDataTitle);
             cust.setAuthor(userDataAuthor);
             cust.setGenre(userDataGenre);

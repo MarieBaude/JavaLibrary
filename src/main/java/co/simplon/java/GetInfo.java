@@ -4,19 +4,28 @@ import java.util.Scanner;
 
 public class GetInfo {
 	
-	public static int getUserInt(int instruction) {
-    	Scanner scInt = new Scanner(System.in);
-	    System.out.print(instruction);
-	    int userInput = scInt.nextInt();
-	    scInt.close();
+	private Scanner scInt;
+	private Scanner scText;
+	
+	GetInfo() {
+		this.scInt = new Scanner(System.in);
+		this.scText = new Scanner(System.in);
+	}
+	
+	public int getUserInt(String instruction) {
+	    System.out.println(instruction);
+	    int userInput = this.scInt.nextInt();
 	    return userInput;
 	}
 	
-	public static String getUserInput(String instruction) {
-    	Scanner scText = new Scanner(System.in);
-	    System.out.print(instruction);
-	    String userInput = scText.nextLine();
-	    scText.close();
+	public String getUserText(String instruction) {
+	    System.out.println(instruction);
+	    String userInput = this.scText.nextLine();
 	    return userInput;
+	}
+	
+	public void closeScanner() {
+		this.scInt.close();
+		this.scText.close();
 	}
 }

@@ -3,6 +3,7 @@ package co.simplon.java.Object;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,8 +12,8 @@ import javax.persistence.Table;
 public class Book {
 	
 	@Id
-	//@GeneratedValue
-	@Column(name = "idbook", unique = true)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idbook", nullable = false)
 	private int idbook;
 	
 	@Column(name = "title", nullable = false)
@@ -127,7 +128,7 @@ public class Book {
 	}
 
 
-	Book (String title, String author, String genre, int nbpage, int nbex) {
+	/*Book (String title, String author, String genre, int nbpage, int nbex) {
 		this.title = title;
 		this.author = author;
 		this.genre = genre;
@@ -137,7 +138,7 @@ public class Book {
 	
 	public Book () {
 		
-	}
+	}*/
 	
 	public StringBuilder toStringBetter() {
 		StringBuilder result = new StringBuilder();
