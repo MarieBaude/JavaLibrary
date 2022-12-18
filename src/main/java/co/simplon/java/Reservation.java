@@ -17,10 +17,6 @@ import co.simplon.java.Object.Book;
 import co.simplon.java.Object.Client;
 
 // TODO réservé
-
-// - demander le nom du livre
-// - vérifier si existant
-// - vérifier si exemplaire encore disponible
 // - faire -1 dans le stock 
 // - créer une entrée dans la table reservation, prendre id du livre, id du client, créer la date
 // - du jour, rajouter deux semaine et créer la date de rendu
@@ -69,7 +65,7 @@ public class Reservation {
 	    
 	}
 	
-	public static boolean getBook() {
+	public static Book getBook() {
 		GetInfo gi = new GetInfo();
 		String userSearchTitle = gi.getUserText("Saisir le titre : ");
 		
@@ -83,51 +79,36 @@ public class Reservation {
     	Book cust = null;
     	try {
     		cust = tq.getSingleResult();
-    		return true;
     	}
     	catch(NoResultException ex) {
     		ex.printStackTrace();
-    		return false;
+    		
     	}
     	finally {
     		em.close();
     	}
+    	return cust;
     }
 	
-	public static void verifBook() {
-		GetInfo gi = new GetInfo();
-	    String userWantBook = gi.getUserText("Entré le nom exacte du livre que vous souhaitez réservé : ");
-	    
-	    EntityManager em = getEntityManagerFactory().createEntityManager();
-	    String query ="SELECT c FROM Book c WHERE c.title = :clientDemand";
-    	
-    	// Issue the query and get a matching Customer
-    	TypedQuery<Book> tq = em.createQuery(query, Book.class);
-    	tq.setParameter("clientDemand", userWantBook);
-    	
-    	Book cust = null;
-    	
-    	try {
-    		cust = tq.getSingleResult();
-    		System.out.println(cust.toString());
-    		if (userWantBook.equals(cust.getTitle())) {
-    			
-                System.out.println("Ce livre est disponible à l'emprunt");
-            } 
-    	}
-    	catch(NoResultException ex) {
-    		System.out.println("Vous n'êtes pas membre");
-    		//ex.printStackTrace();
-    	}
-    	finally {
-    		em.close();
-    	}
+	public static void dataReservation() {
+		// faire - 1 dans le nombre d'emplaire du livre
+		// créer une entré dans la table reservation avec date du jour, date du jour + 15 jours, id user, id book
+		// retourner l'id de réservation
+
+		System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
 	}
 	
-	
 	public static void borrowBook() {
-		if(checkClient() && getBook()) {
-			System.out.println("part3");
+		if(checkClient()) {
+			Book a = getBook();
+			
+			if (a != null && a.getNbex() > 0) {
+				dataReservation();
+    		} else if (a != null && a.getNbex() == 0){
+    			System.out.println("Il n'y a pas exemplaire disponible pour le moment");
+    		} else {
+    			System.out.println("Ce livre n'est pas disponible");
+    		}
 		}
 	    
 	}
