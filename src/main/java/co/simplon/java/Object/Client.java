@@ -107,4 +107,11 @@ public class Client {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "Client [iduser=" + iduser + ", identifier=" + identifier + ", password=" + password + ", lastname="
+				+ lastname + ", firstname=" + firstname + "]";
+	}
+	
+
 }
