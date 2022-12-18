@@ -30,7 +30,6 @@ public class BookCrud {
     </ul>
     @author mariebaude
     */
-    
     public static void getBooks() {
     	EntityManager em = getEntityManagerFactory().createEntityManager();
     	
@@ -61,8 +60,8 @@ public class BookCrud {
     
     public static void search() {
     	GetInfo gi = new GetInfo();
-	    String userSearch = gi.getUserText("Saisir un nom exacte : ");
-	    gi.closeScanner();
+	    String userSearch = gi.getUserText("Saisir une recherche : ");
+	    // gi.closeScanner();
 	    
     	EntityManager em = getEntityManagerFactory().createEntityManager();
   
@@ -91,17 +90,12 @@ public class BookCrud {
     public static void addBook() {
     	
     	GetInfo gi = new GetInfo();
-    	
-	    //int userDataId = gi.getUserInt("Saisir l'id : ");
 	
 	    String userDataTitle = gi.getUserText("Saisir le titre : ");
 	    String userDataAuthor = gi.getUserText("Saisir l'auteur : ");
 	    String userDataGenre = gi.getUserText("Saisir le genre : ");
-	
 	    int userDataNbPage = gi.getUserInt("Saisir le nombre de page : ");
 	    int userDataNbEx = gi.getUserInt("Saisir le nombre d'exemplaire : ");
-    	
-	    // gi.closeScanner();
 
     	// The EntityManager class allows operations such as create, read, update, delete
         EntityManager em = getEntityManagerFactory().createEntityManager();
@@ -126,6 +120,7 @@ public class BookCrud {
             // Save the customer object
             em.persist(cust);
             et.commit();
+            System.out.println("Livre bien créer");
         } catch (Exception ex) {
             // If there is an exception rollback changes
             if (et != null) {
@@ -139,44 +134,15 @@ public class BookCrud {
     }
 	    
     public static void updateBook() {
-    	Scanner scId = new Scanner(System.in);
-	    System.out.print("Saisir l'id : ");
-	    int userDataId = scId.nextInt();
-	    userDataId = userDataId;
-	
-	
-    	Scanner scTitle = new Scanner(System.in);
-	    System.out.print("Saisir le titre : ");
-	    String userDataTitle = scTitle.nextLine();
-	    userDataTitle = userDataTitle;
-	
-	
-
-    	Scanner scAuthor = new Scanner(System.in);
-	    System.out.print("Saisir l'auteur : ");
-	    String userDataAuthor = scAuthor.nextLine();
-	    userDataAuthor = userDataAuthor;
-	
-	
-	
-    	Scanner scGenre = new Scanner(System.in);
-	    System.out.print("Saisir le genre : ");
-	    String userDataGenre = scGenre.nextLine();
-	    userDataGenre = userDataGenre;
-	
-	
-	
-    	Scanner scNbPage = new Scanner(System.in);
-	    System.out.print("Saisir le nombre de page : ");
-	    int userDataNbPage = scNbPage.nextInt();
-	    userDataNbPage = userDataNbPage;
-	
-	
-	
-    	Scanner scNbEx = new Scanner(System.in);
-	    System.out.print("Saisir le nombre d'exemplaire : ");
-	    int userDataNbEx = scNbEx.nextInt();
-	    userDataNbEx = userDataNbEx;
+    	GetInfo gi = new GetInfo();
+    	
+	    int userDataId = gi.getUserInt("Saisir l'id d'un livre existant : ");
+	    String userDataTitle = gi.getUserText("Saisir le nouveau titre : ");
+	    String userDataAuthor = gi.getUserText("Saisir le nouveau auteur : ");
+	    String userDataGenre = gi.getUserText("Saisir le nouveau genre : ");
+	    int userDataNbPage = gi.getUserInt("Saisir le nouveau nombre de page : ");
+	    int userDataNbEx = gi.getUserInt("Saisir le nouveau nombre d'exemplaire : ");
+    	
 	    
         EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
@@ -199,6 +165,7 @@ public class BookCrud {
             // Save the customer object
             em.persist(cust);
             et.commit();
+            System.out.println("Livre bien mis à jour");
         } catch (Exception ex) {
             // If there is an exception rollback changes
             if (et != null) {
@@ -212,9 +179,8 @@ public class BookCrud {
     }
     
     public static void deleteBook() {
-    	Scanner scId = new Scanner(System.in);
-	    System.out.print("Saisir l'id : ");
-	    int userDataId = scId.nextInt();
+    	GetInfo gi = new GetInfo();
+	    int userDataId = gi.getUserInt("Saisir l'id d'un livre existant : ");
 	    
     	EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
@@ -226,6 +192,7 @@ public class BookCrud {
             cust = em.find(Book.class, userDataId);
             em.remove(cust);
             et.commit();
+            System.out.println("Livre bien supprimer");
         } catch (Exception ex) {
             // If there is an exception rollback changes
             if (et != null) {
