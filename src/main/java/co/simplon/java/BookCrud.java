@@ -34,10 +34,10 @@ public class BookCrud {
     	EntityManager em = getEntityManagerFactory().createEntityManager();
     	
     	// the lowercase c refers to the object
-    	// :custID is a parameterized query thats value is set below
+    	// :idbook is a parameterized query thats value is set below
     	String strQuery = "SELECT c FROM Book c WHERE c.idbook IS NOT NULL";
     	
-    	// Issue the query and get a matching Customer
+    	// Issue the query and get a matching book
     	TypedQuery<Book> tq = em.createQuery(strQuery, Book.class);
     	List<Book> custs;
     	try {
@@ -88,7 +88,6 @@ public class BookCrud {
     }
 	
     public static void addBook() {
-    	
     	GetInfo gi = new GetInfo();
 	
 	    String userDataTitle = gi.getUserText("Saisir le titre : ");
@@ -108,9 +107,7 @@ public class BookCrud {
             et = em.getTransaction();
             et.begin();
 
-            // Create and set values for new customer
             Book cust = new Book();
-            //cust.setIdbook(userDataId);
             cust.setTitle(userDataTitle);
             cust.setAuthor(userDataAuthor);
             cust.setGenre(userDataGenre);

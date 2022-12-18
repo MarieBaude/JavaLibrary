@@ -17,7 +17,7 @@ import co.simplon.java.Object.Book;
 import co.simplon.java.Object.Client;
 
 // TODO réservé
-// - confirmer l'identitéé de la bdd
+
 // - demander le nom du livre
 // - vérifier si existant
 // - vérifier si exemplaire encore disponible
@@ -36,51 +36,99 @@ public class Reservation {
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("JEETut3");
 	
-	public static void checkClient() {
-		Scanner sc = new Scanner(System.in);
-	    System.out.print("Saisir l'identifiant : ");
-	    String userIdentifiant = sc.nextLine();
-	    
-	    System.out.print("Saisir le mot de passe : ");
-	    String userPw = sc2.nextLine();
-	   
-	    
-	    // Create a session object to interact with the database
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-
-		Query query=session.createQuery("FROM users where name=:name");
-		  query.setParameter("name","abc");
-		   List list=query.list();
+	public static boolean checkClient() {
+		GetInfo gi = new GetInfo();
 		
-		try {
-			 // Use the session object to create a query to retrieve the data from the database
-		    List<Client> entities = session.createQuery("FROM client", Client.class).list();
-
-		    // Use a Scanner object to read the data from the input source
-		    Scanner scanner = new Scanner(System.in);
-
-		    // Iterate through the list of entities and compare the data in the scanner with the data in the database
-		    for (Client entity : entities) {
-		        String value = scanner.next();
-
-		        if (value.equals(entity.getIdentifier())) {
-		            System.out.println("Connexion réussi");
-		        } else {
-		        	System.out.println("Vous n'êtes pas membre");
-		        }
-		    }
-			
-		} catch(Exception e) {
-    		
-    	}
+	    String userIdentifier = gi.getUserText("Saisir votre identifiant : ");
+	    //String userPw = gi.getUserText("Saisir votre mot de passe : ");
 	   
+	    EntityManager em = getEntityManagerFactory().createEntityManager();
+	    String query ="SELECT c FROM Client c WHERE c.identifier = :clientIdentifier";
+    	
+    	// Issue the query and get a matching Customer
+    	TypedQuery<Client> tq = em.createQuery(query, Client.class);
+    	tq.setParameter("clientIdentifier", userIdentifier);
+    	
+    	Client cust = null;
+    	try {
+    		cust = tq.getSingleResult();
+    		System.out.println(cust.toString());
+    		if (userIdentifier.equals(cust.getIdentifier())) {
+                System.out.println("Connexion réussi");
+                return true;
+            } 
+    	}
+    	catch(NoResultException ex) {
+    		System.out.println("Vous n'êtes pas membre");
+    		//ex.printStackTrace();
+    	}
+    	finally {
+    		em.close();
+    	}
+    	return false;
 	    
+	}
+	
+	public static boolean getBook() {
+		GetInfo gi = new GetInfo();
+		String userSearchTitle = gi.getUserText("Saisir le titre : ");
+		
+    	EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+    	
+    	String query = "SELECT c FROM Book c WHERE c.title = :title";
+    	
+    	TypedQuery<Book> tq = em.createQuery(query, Book.class);
+    	tq.setParameter("title", userSearchTitle);
+    	
+    	Book cust = null;
+    	try {
+    		cust = tq.getSingleResult();
+    		return true;
+    	}
+    	catch(NoResultException ex) {
+    		ex.printStackTrace();
+    		return false;
+    	}
+    	finally {
+    		em.close();
+    	}
+    }
+	
+	public static void verifBook() {
+		GetInfo gi = new GetInfo();
+	    String userWantBook = gi.getUserText("Entré le nom exacte du livre que vous souhaitez réservé : ");
+	    
+	    EntityManager em = getEntityManagerFactory().createEntityManager();
+	    String query ="SELECT c FROM Book c WHERE c.title = :clientDemand";
+    	
+    	// Issue the query and get a matching Customer
+    	TypedQuery<Book> tq = em.createQuery(query, Book.class);
+    	tq.setParameter("clientDemand", userWantBook);
+    	
+    	Book cust = null;
+    	
+    	try {
+    		cust = tq.getSingleResult();
+    		System.out.println(cust.toString());
+    		if (userWantBook.equals(cust.getTitle())) {
+    			
+                System.out.println("Ce livre est disponible à l'emprunt");
+            } 
+    	}
+    	catch(NoResultException ex) {
+    		System.out.println("Vous n'êtes pas membre");
+    		//ex.printStackTrace();
+    	}
+    	finally {
+    		em.close();
+    	}
 	}
 	
 	
 	public static void borrowBook() {
-		checkClient();
+		if(checkClient() && getBook()) {
+			System.out.println("part3");
+		}
 	    
 	}
 	

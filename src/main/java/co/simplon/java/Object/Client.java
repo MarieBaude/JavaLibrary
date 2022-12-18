@@ -102,5 +102,9 @@ public class Client {
 		this.lastname = lastname;
 		this.firstname = firstname;
 	}
+	
+	public Client () {
+		
+	}
 
 }
