@@ -99,7 +99,7 @@ public class Reservation {
         }
 	}
 	
-	public static void dataReservation(Book book, Client client) {
+	public static void dataReservation(Book book, Client client, Reservation reservation) {
 		subtractExemplary(book);
 		
 		// créer une entré dans la table reservation avec date du jour, date du jour + 15 jours, id user, id book
@@ -115,19 +115,13 @@ public class Reservation {
             et = em.getTransaction();
             et.begin();
 
-            Book cust = new Book();
-            cust.setTitle(userDataTitle);
-            cust.setAuthor(userDataAuthor);
-            cust.setGenre(userDataGenre);
-            cust.setNbpage(userDataNbPage);
-            cust.setNbex(userDataNbEx);
+            Reservation saveDataRes = new Reservation();
+            saveDataRes.set
 
             // Save the customer object
-            em.persist(cust);
+            em.persist(saveDataRes);
             et.commit();
-            System.out.println("Livre bien créer");
         } catch (Exception ex) {
-            // If there is an exception rollback changes
             if (et != null) {
                 et.rollback();
             }
