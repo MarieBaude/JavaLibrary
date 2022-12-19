@@ -96,7 +96,13 @@ public class Reservation {
 		this.idbook = idbook;
 	}
 
-	
+	Reservation() {
+		this.idreservation = idreservation;
+		this.dateloan = dateloan;
+		this.datereturn = datereturn;
+		this.iduser = iduser;
+		this.idbook = idbook;
+	}
 	
 
 }
