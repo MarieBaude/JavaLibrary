@@ -104,6 +104,38 @@ public class Reservation {
 		
 		// créer une entré dans la table reservation avec date du jour, date du jour + 15 jours, id user, id book
 		// retourner l'id de réservation
+		
+		EntityManager em = getEntityManagerFactory().createEntityManager();
+        // Used to issue transactions on the EntityManager
+        EntityTransaction et = null;
+        
+
+        try {
+            // Get transaction and start
+            et = em.getTransaction();
+            et.begin();
+
+            Book cust = new Book();
+            cust.setTitle(userDataTitle);
+            cust.setAuthor(userDataAuthor);
+            cust.setGenre(userDataGenre);
+            cust.setNbpage(userDataNbPage);
+            cust.setNbex(userDataNbEx);
+
+            // Save the customer object
+            em.persist(cust);
+            et.commit();
+            System.out.println("Livre bien créer");
+        } catch (Exception ex) {
+            // If there is an exception rollback changes
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            // Close EntityManager
+            em.close();
+        }
 
 		//System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
 	}
