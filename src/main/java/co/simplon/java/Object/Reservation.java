@@ -103,6 +103,20 @@ public class Reservation {
 		this.iduser = iduser;
 		this.idbook = idbook;
 	}
+
+	public Reservation() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setIduser(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setIdbook(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import co.simplon.java.Object.Book;
 import co.simplon.java.Object.Client;
+import co.simplon.java.Object.Reservation;
 
 
 
@@ -103,13 +104,16 @@ public class ReservationManage {
             et = em.getTransaction();
             et.begin();
 
-            ReservationManage saveDataRes = new ReservationManage();
-            saveDataRes.
+            Reservation saveDataRes = new Reservation();
+            saveDataRes.setIdreservation(0);
+            saveDataRes.setDateloan(null);
+            saveDataRes.setDatereturn(null);
+            saveDataRes.setIduser(null);
+            saveDataRes.setIdbook(null);
            
             em.persist(saveDataRes);
             et.commit();
             
-            System.out.println("Votre numéro de réservation est : ");
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();
@@ -119,7 +123,7 @@ public class ReservationManage {
             // Close EntityManager
             em.close();
         }
-		//System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
+		System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
 	}
 	
 	public static void borrowBook() {
@@ -133,8 +137,7 @@ public class ReservationManage {
 			System.out.println("Il n'y a pas exemplaire disponible pour le moment");
 		} else {
 			System.out.println("Ce livre n'est pas disponible");
-		}
-	    
+		}   
 	}
 	
 	public static void addExemplary(Book book) {
@@ -160,14 +163,40 @@ public class ReservationManage {
         }
 	}
 	
-	public static void renderBook() {
-		Book bookRequest = getBook();
+	public static Reservation getReservation() {
+		GetInfo gi = new GetInfo();
+		String userSearchNb = gi.getUserText("Saisir le numéro de réservation : ");
 		
+    	EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+    	
+    	String query = "SELECT r FROM Reservation r WHERE r.idreservation = :idreservation";
+    	
+    	TypedQuery<Reservation> tq = em.createQuery(query, Reservation.class);
+    	tq.setParameter("idreservation", userSearchNb);
+    	
+    	Reservation cust = null;
+    	try {
+    		cust = tq.getSingleResult();
+    	}
+    	catch(NoResultException ex) {
+    		ex.printStackTrace();
+    		
+    	}
+    	finally {
+    		em.close();
+    	}
+    	return cust;
+    }
+	
+	public static void renderBook() {
 		checkClient();
 		
-		// TODO rendre
-		// - demander le code de rendu
-		addExemplary(bookRequest);
+		Reservation reservationRequest = getReservation();
+		Book bookRequest = getBook();
+		
+		if (bookRequest != null && reservationRequest != null) {
+			addExemplary(bookRequest);
+		}
 	}
 
 	
