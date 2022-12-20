@@ -18,17 +18,8 @@ public class BookCrud {
             .createEntityManagerFactory("JEETut3");
     
     /**
-	<ul>
-	    <li>getBooks is a public static method that retrieves a list of books from a database and prints their title, author, and genre to the console.</li>
-	    <li>The method first creates an EntityManager object using the getEntityManagerFactory method.</li>
-	    <li>It then defines a query to select all books from the Book object and stores the query in a String object.</li>
-	    <li>The method then creates a TypedQuery object using the EntityManager object and the query String, specifying the Book class as the result type.</li>
-	    <li>The method then attempts to retrieve the result list of the query and store it in a List object.</li>
-	    <li>It then iterates through the List and prints the title, author, and genre of each Book object to the console.</li>
-	    <li>If an exception is thrown, the method prints the stack trace.</li>
-	    <li>Finally, the method closes the EntityManager and getEntityManagerFactory objects.</li>
-    </ul>
-    @author mariebaude
+     * Récupére la liste de tout les livres
+    	@author mariebaude
     */
     public static void getBooks() {
     	EntityManager em = getEntityManagerFactory().createEntityManager();
@@ -58,6 +49,10 @@ public class BookCrud {
     	getEntityManagerFactory().close();
     }
     
+    /**
+	  * Permet de faire une recherche
+   		@author mariebaude
+	  */
     public static void search() {
     	GetInfo gi = new GetInfo();
 	    String userSearch = gi.getUserText("Saisir une recherche : ");
@@ -87,6 +82,10 @@ public class BookCrud {
     	}
     }
 	
+    /**
+	  * Ajout d'un livre
+   		@author mariebaude
+	  */
     public static void addBook() {
     	GetInfo gi = new GetInfo();
 	
@@ -129,7 +128,11 @@ public class BookCrud {
             em.close();
         }
     }
-	    
+	
+    /**
+	  * Met à jour l'intégralité d'un livre via son id
+   		@author mariebaude
+	  */
     public static void updateBook() {
     	GetInfo gi = new GetInfo();
     	
@@ -175,6 +178,10 @@ public class BookCrud {
         }
     }
     
+    /**
+	  * Supprimer un livre via son id
+   		@author mariebaude
+	  */
     public static void deleteBook() {
     	GetInfo gi = new GetInfo();
 	    int userDataId = gi.getUserInt("Saisir l'id d'un livre existant : ");
