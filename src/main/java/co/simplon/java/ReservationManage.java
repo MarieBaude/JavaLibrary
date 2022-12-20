@@ -1,8 +1,5 @@
 package co.simplon.java;
 
-import java.util.List;
-import java.util.Scanner;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -10,14 +7,12 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import co.simplon.java.Object.Book;
 import co.simplon.java.Object.Client;
 
 
-public class Reservation {
+
+public class ReservationManage {
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("JEETut3");
 	
@@ -99,28 +94,22 @@ public class Reservation {
         }
 	}
 	
-	public static void dataReservation(Book book, Client client, Reservation reservation) {
-		subtractExemplary(book);
-		
-		// créer une entré dans la table reservation avec date du jour, date du jour + 15 jours, id user, id book
-		// retourner l'id de réservation
-		
+	public static void dataReservation() {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
-        // Used to issue transactions on the EntityManager
         EntityTransaction et = null;
-        
 
         try {
             // Get transaction and start
             et = em.getTransaction();
             et.begin();
 
-            Reservation saveDataRes = new Reservation();
-            saveDataRes.set
-
-            // Save the customer object
+            ReservationManage saveDataRes = new ReservationManage();
+            saveDataRes.
+           
             em.persist(saveDataRes);
             et.commit();
+            
+            System.out.println("Votre numéro de réservation est : ");
         } catch (Exception ex) {
             if (et != null) {
                 et.rollback();
@@ -130,7 +119,6 @@ public class Reservation {
             // Close EntityManager
             em.close();
         }
-
 		//System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
 	}
 	
@@ -139,7 +127,8 @@ public class Reservation {
 		Book bookRequest = getBook();
 		
 		if (bookRequest != null && user != null && bookRequest.getNbex() > 0) {
-			dataReservation(bookRequest, user);
+			subtractExemplary(bookRequest);
+			dataReservation();
 		} else if (bookRequest != null && user != null && bookRequest.getNbex() == 0){
 			System.out.println("Il n'y a pas exemplaire disponible pour le moment");
 		} else {
@@ -148,16 +137,37 @@ public class Reservation {
 	    
 	}
 	
-	public static void addExemplary() {
-		//-  ajouter 1 au ex du livre
+	public static void addExemplary(Book book) {
+		EntityManager em = getEntityManagerFactory().createEntityManager();
+        EntityTransaction et = null;
+
+        try {
+            et = em.getTransaction();
+            et.begin();
+            
+            Book bookToUpdate = em.find(Book.class, book.getIdbook());
+            bookToUpdate.setNbex(bookToUpdate.getNbex() + 1);
+
+            em.persist(bookToUpdate);
+            et.commit();
+        } catch (Exception ex) {
+            if (et != null) {
+                et.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            em.close();
+        }
 	}
 	
 	public static void renderBook() {
+		Book bookRequest = getBook();
+		
 		checkClient();
 		
 		// TODO rendre
 		// - demander le code de rendu
-		addExemplary();
+		addExemplary(bookRequest);
 	}
 
 	

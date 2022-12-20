@@ -21,10 +21,10 @@ public class Reservation {
 	private Date datereturn;
 	
 	@Column(name = "iduser", nullable = false)
-	private String iduser;
+	private int iduser;
 	
 	@Column(name = "idbook", nullable = false)
-	private String idbook;
+	private int idbook;
 
 	/**
 	 * @return the idreservation
@@ -71,32 +71,32 @@ public class Reservation {
 	/**
 	 * @return the iduser
 	 */
-	public String getIduser() {
+	public int getIduser() {
 		return iduser;
 	}
 
 	/**
 	 * @param iduser the iduser to set
 	 */
-	public void setIduser(String iduser) {
+	public void setIduser(int iduser) {
 		this.iduser = iduser;
 	}
 
 	/**
 	 * @return the idbook
 	 */
-	public String getIdbook() {
+	public int getIdbook() {
 		return idbook;
 	}
 
 	/**
 	 * @param idbook the idbook to set
 	 */
-	public void setIdbook(String idbook) {
+	public void setIdbook(int idbook) {
 		this.idbook = idbook;
 	}
 
-	Reservation() {
+	Reservation(int idreservation, Date dateloan, Date datereturn, int iduser, int idbook) {
 		this.idreservation = idreservation;
 		this.dateloan = dateloan;
 		this.datereturn = datereturn;

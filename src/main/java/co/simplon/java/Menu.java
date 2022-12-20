@@ -60,10 +60,10 @@ public class Menu {
     			BookCrud.deleteBook();
      			break;     			
     		case 6:
-    			Reservation.borrowBook();
+    			ReservationManage.borrowBook();
     			break;
     		case 7:
-    			Reservation.renderBook();
+    			ReservationManage.renderBook();
     			break;
     		case 8:
     			BookCrud.getEntityManagerFactory().close();	
