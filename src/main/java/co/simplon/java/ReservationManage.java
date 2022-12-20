@@ -22,11 +22,14 @@ public class ReservationManage {
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("JEETut3");
 	
+	 /**
+	  * Vérifie si l'identifiant donné dans la console existe en base de donnée
+    	@author mariebaude
+	  */
 	public static Client checkClient() {
 		GetInfo gi = new GetInfo();
 		
 	    String userIdentifier = gi.getUserText("Saisir votre identifiant : ");
-	    //String userPw = gi.getUserText("Saisir votre mot de passe : ");
 	   
 	    EntityManager em = getEntityManagerFactory().createEntityManager();
 	    String query ="SELECT c FROM Client c WHERE c.identifier = :clientIdentifier";
@@ -52,6 +55,10 @@ public class ReservationManage {
 	    return cust;
 	}
 	
+	/**
+	  * Récupére les informations d'un livre avec son titre
+   		@author mariebaude
+	  */
 	public static Book getBook() {
 		GetInfo gi = new GetInfo();
 		String userSearchTitle = gi.getUserText("Saisir le titre : ");
@@ -77,6 +84,10 @@ public class ReservationManage {
     	return cust;
     }
 	
+	/**
+	  * Retire 1 au nombre d'emplaire d'un livre
+   		@author mariebaude
+	  */
 	public static void subtractExemplary(Book book) {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
@@ -100,12 +111,13 @@ public class ReservationManage {
         }
 	}
 	
-	public static void dataReservation() {
+	/**
+	  * Récupére la date du jour dans un format précis, récupére la date et ajoute 15 jours, enregistre tout les informations nécessaire à la création d'une entré dans la table réservation
+  		@author mariebaude
+	  */
+	public static void dataReservation(Book book, Client client) {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
-        
-        Client user = checkClient();
-		Book bookRequest = getBook();
 		
 		// For date loan
 		Date date = new Date();
@@ -125,11 +137,12 @@ public class ReservationManage {
             Reservation saveDataRes = new Reservation();
             saveDataRes.setDateloan(date);
             saveDataRes.setDatereturn(dateResult);
-            saveDataRes.setIduser(user.getIduser());
-            saveDataRes.setIdbook(bookRequest.getIdbook());
+            saveDataRes.setIduser(client.getIduser());
+            saveDataRes.setIdbook(book.getIdbook());
            
             em.persist(saveDataRes);
             et.commit();
+            
             
         } catch (Exception ex) {
             if (et != null) {
@@ -140,16 +153,21 @@ public class ReservationManage {
             // Close EntityManager
             em.close();
         }
-		System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : ");
+        
+		System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : " + );
 	}
 	
+	/**
+	  * Récupére les informations d'un client, d'un livre et exécute une condition selon la disponibilité du livre
+  		@author mariebaude
+	  */
 	public static void borrowBook() {
 		Client user = checkClient();
 		Book bookRequest = getBook();
 		
 		if (bookRequest != null && user != null && bookRequest.getNbex() > 0) {
 			subtractExemplary(bookRequest);
-			dataReservation();
+			dataReservation(bookRequest, user);
 		} else if (bookRequest != null && user != null && bookRequest.getNbex() == 0){
 			System.out.println("Il n'y a pas exemplaire disponible pour le moment");
 		} else {
@@ -157,6 +175,10 @@ public class ReservationManage {
 		}   
 	}
 	
+	/**
+	  * Ajoute 1 au nombre d'emplaire d'un livre
+  		@author mariebaude
+	  */
 	public static void addExemplary(Book book) {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
@@ -180,6 +202,10 @@ public class ReservationManage {
         }
 	}
 	
+	/**
+	  * Récupére une réservation via son id
+  		@author mariebaude
+	  */
 	public static Reservation getReservation() {
 		GetInfo gi = new GetInfo();
 		int userSearchNb = gi.getUserInt("Saisir le numéro de réservation : ");
@@ -205,6 +231,10 @@ public class ReservationManage {
     	return cust;
     }
 	
+	/**
+	  * Exécute les fonctions pour le rendu d'un livre
+  		@author mariebaude
+	  */
 	public static void renderBook() {
 		checkClient();
 		
