@@ -56,7 +56,7 @@ public class ReservationManage {
 	}
 	
 	/**
-	  * Récupére les informations d'un livre avec son titre
+	  * Récupére les informations d'un livre avec son titre donné en console
    		@author mariebaude
 	  */
 	public static Book getBook() {
@@ -83,6 +83,32 @@ public class ReservationManage {
     	}
     	return cust;
     }
+	
+	/**
+	  * Récupére les informations d'un livre avec son id
+  		@author mariebaude
+	  */
+	public static Book getBookById(int idbook) {
+	   	EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+	   	
+	   	String query = "SELECT b FROM Book b WHERE b.idbook = :idbook";
+	   	
+	   	TypedQuery<Book> tq = em.createQuery(query, Book.class);
+	   	tq.setParameter("idbook", idbook);
+	   	
+	   	Book cust = null;
+	   	try {
+	   		cust = tq.getSingleResult();
+	   	}
+	   	catch(NoResultException ex) {
+	   		ex.printStackTrace();
+	   		
+	   	}
+	   	finally {
+	   		em.close();
+	   	}
+	   	return cust;
+	}
 	
 	/**
 	  * Retire 1 au nombre d'emplaire d'un livre
@@ -142,7 +168,8 @@ public class ReservationManage {
            
             em.persist(saveDataRes);
             et.commit();
-            
+            int idResult = saveDataRes.getIdreservation();
+            System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : " + idResult);
             
         } catch (Exception ex) {
             if (et != null) {
@@ -154,7 +181,6 @@ public class ReservationManage {
             em.close();
         }
         
-		System.out.println("Livre bien emprunté, merci de le rendre dans 15 jours, votre numéro de réservation est : " + );
 	}
 	
 	/**
@@ -235,14 +261,15 @@ public class ReservationManage {
 	  * Exécute les fonctions pour le rendu d'un livre
   		@author mariebaude
 	  */
-	public static void renderBook() {
+	public static void returnBook() {
 		checkClient();
 		
 		Reservation reservationRequest = getReservation();
-		Book bookRequest = getBook();
+		Book book = getBookById(reservationRequest.getIdbook());
 		
-		if (bookRequest != null && reservationRequest != null) {
-			addExemplary(bookRequest);
+		if (book != null && reservationRequest != null) {
+			addExemplary(book);
+			System.out.println("Libre bien rendu");
 		}
 	}
 

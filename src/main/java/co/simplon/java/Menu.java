@@ -63,7 +63,7 @@ public class Menu {
     			ReservationManage.borrowBook();
     			break;
     		case 7:
-    			ReservationManage.renderBook();
+    			ReservationManage.returnBook();
     			break;
     		case 8:
     			BookCrud.getEntityManagerFactory().close();	
