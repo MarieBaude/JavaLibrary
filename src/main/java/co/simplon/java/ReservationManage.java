@@ -1,11 +1,16 @@
 package co.simplon.java;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
 
 import co.simplon.java.Object.Book;
 import co.simplon.java.Object.Client;
@@ -98,18 +103,30 @@ public class ReservationManage {
 	public static void dataReservation() {
 		EntityManager em = getEntityManagerFactory().createEntityManager();
         EntityTransaction et = null;
+        
+        Client user = checkClient();
+		Book bookRequest = getBook();
+		
+		// For date loan
+		Date date = new Date();
+		SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+		String dateFormatee = formatDate.format(date);
 
+		// For date return
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 15);
+		Date dateResult = calendar.getTime();
+		
         try {
             // Get transaction and start
             et = em.getTransaction();
             et.begin();
 
             Reservation saveDataRes = new Reservation();
-            saveDataRes.setIdreservation(0);
-            saveDataRes.setDateloan(null);
-            saveDataRes.setDatereturn(null);
-            saveDataRes.setIduser(null);
-            saveDataRes.setIdbook(null);
+            saveDataRes.setDateloan(date);
+            saveDataRes.setDatereturn(dateResult);
+            saveDataRes.setIduser(user.getIduser());
+            saveDataRes.setIdbook(bookRequest.getIdbook());
            
             em.persist(saveDataRes);
             et.commit();
@@ -165,7 +182,7 @@ public class ReservationManage {
 	
 	public static Reservation getReservation() {
 		GetInfo gi = new GetInfo();
-		String userSearchNb = gi.getUserText("Saisir le numéro de réservation : ");
+		int userSearchNb = gi.getUserInt("Saisir le numéro de réservation : ");
 		
     	EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
     	
